@@ -74,53 +74,48 @@ const listaAbr2023 = {
       Cable: [
         {
           titulo: "TV",
-          precio: [1930, 1544, 1351, 1160],
+          precio: [2200, 1760, 1540, 1320],
           porcentajes: ["0%", "20%", "30%", "40%"],
         },
         {
-          titulo: "Go",
-          precio: [650, 520, 455, 390],
-          porcentajes: ["0%", "30%", "39%","40%"],
+          titulo: "Go/IPTV",
+          precio: [700, 490, 420],
+          porcentajes: ["0%", "30%","40%"],
         },
         {
           titulo: "Go Adicional",
-          precio: 340,
+          precio: 370,
   
         },
-        { titulo: "Futbol", precio: 1535 },
-        { titulo: "HBO", precio: 868 },
+        { titulo: "Futbol", precio: 2060 },
+        { titulo: "HBO", precio: 1215 },
         { titulo: "Adultos", precio: 300 },
-  { titulo: "IP Fija", precio: 3600 },
+        { titulo: "IP Fija", precio: 4000 },
       ],
       Internet: [
         {
           titulo: "Internet 50MB",
-          precio: [2990,2691,2392 ,2093, 1790],
-          porcentajes: ["0%","10%", "20%", "30%", "40%"],
-        },
-        {
-          titulo: "UI-788	Internet 100MB",
-          precio: [4310, 3448, 3017, 2586 , 2155],
-          porcentajes: ["0%", "20%", "30%", "40%","50%"],
-        },
-       {
-          titulo: "UI-721	Internet 100MB",
-          precio: [4628 ,3702.4 ,3239.6 ,3239.6],
+          precio: [3380, 2704, 2366, 2028],
           porcentajes: ["0%", "20%", "30%", "40%"],
         },
         {
+          titulo: "UI-788 Internet 100MB",
+          precio: [4960, 3968, 3472,2976],
+          porcentajes: ["0%","20%","30%","40%"],
+        },
+        {
           titulo: "Internet 200MB",
-          precio: [5890, 3640],
+          precio: [6490,3894],
           porcentajes: ["0%","40%"],
         },
         {
           titulo: "Internet 300MB",
-          precio: [6940,4290],
+          precio: [7390,4434],
           porcentajes: ["0%","40%"],
         },
         {
           titulo: "migrar/Internet 20MB",
-          precio: 2700,
+          precio: 3100,
         },
       ],
     },
