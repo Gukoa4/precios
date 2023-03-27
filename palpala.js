@@ -11,8 +11,8 @@ const listaAbr2023 = {
         },
         {
           titulo: "Go/IPTV",
-          precio: [790,632, 553, 470],
-          porcentajes: ["0%","20%", "30%", "40%"],
+          precio: [790,632, 553, 470,0],
+          porcentajes: ["0%","20%", "30%", "40%" ,"100%"],
         },
         {
           titulo: "Go Adicional",
