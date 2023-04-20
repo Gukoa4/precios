@@ -95,12 +95,12 @@ const listaAbr2023 = {
       Internet: [
         {
           titulo: "Internet 50MB",
-          precio: [3380, 2704, 2366, 2028],
+          precio: [3380, 2704, 2366, 2030],
           porcentajes: ["0%", "20%", "30%", "40%"],
         },
         {
           titulo: "UI-788 Internet 100MB",
-          precio: [4960, 3968, 3472,2976],
+          precio: [4960, 3968, 3472,2480],
           porcentajes: ["0%","20%","30%","40%"],
         },
         {
@@ -110,8 +110,8 @@ const listaAbr2023 = {
         },
         {
           titulo: "Internet 300MB",
-          precio: [7390,4434],
-          porcentajes: ["0%","40%"],
+          precio: [7390,3690],
+          porcentajes: ["0%","50%"],
         },
         {
           titulo: "migrar/Internet 20MB",
