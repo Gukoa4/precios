@@ -31,28 +31,28 @@ const listaAbr2023 = {
         },
         {
           titulo: "UI-776 Internet 100MB",
-          precio: [4890, 3912, 3423 ,2930],
+          precio: [5690, 4552, 3983 ,3414],
           porcentajes: ["0%", "20%", "30%","50%"],
         },
         {
           titulo: "migrar/UI-740 Internet 100MB",
-          precio: [6030, 4824, 4221],
+          precio: [6870, 5496, 4809],
           porcentajes: ["0%", "20%", "30%"],
         },
   
         {
           titulo: "Internet 200MB",
-          precio: [6490,3894],
+          precio: [13420,8052],
           porcentajes: ["0%","40%"],
         },
         {
           titulo: "Internet 300MB",
-          precio: [7390,4430],
+          precio: [8490,5094],
           porcentajes: ["0%","40%"],
         },
         {
           titulo: "Internet 500MB",
-          precio: 22280,
+          precio: 25400,
         },
         {
           titulo: "migrar/Internet 10MB",
@@ -74,7 +74,7 @@ const listaAbr2023 = {
       Cable: [
         {
           titulo: "TV",
-          precio: [2200, 1760, 1540, 1320],
+          precio: [2480, 1984, 1736, 1488],
           porcentajes: ["0%", "20%", "30%", "40%"],
         },
         {
@@ -87,30 +87,30 @@ const listaAbr2023 = {
           precio: 370,
   
         },
-        { titulo: "Futbol", precio: 2060 },
+        { titulo: "Futbol", precio: 2800 },
         { titulo: "HBO", precio: 1215 },
         { titulo: "Adultos", precio: 300 },
-        { titulo: "IP Fija", precio: 4000 },
+        { titulo: "IP Fija", precio: 4560 },
       ],
       Internet: [
         {
           titulo: "Internet 50MB",
-          precio: [3380, 2704, 2366, 2030],
+          precio: [3850, 3080, 2695, 2310],
           porcentajes: ["0%", "20%", "30%", "40%"],
         },
         {
           titulo: "UI-788 Internet 100MB",
-          precio: [4960, 3968, 3472,2480],
+          precio: [5750, 4600, 4025, 3450],
           porcentajes: ["0%","20%","30%","40%"],
         },
         {
           titulo: "Internet 200MB",
-          precio: [6490,3894],
+          precio: [7400, 4440],
           porcentajes: ["0%","40%"],
         },
         {
           titulo: "Internet 300MB",
-          precio: [7390,3690],
+          precio: [8500, 4250],
           porcentajes: ["0%","50%"],
         },
         {
