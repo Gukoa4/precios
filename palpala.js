@@ -6,7 +6,7 @@ const listaAbr2023 = {
       Cable: [
         {
           titulo: "TV",
-          precio: [3190, 2552, 2233, 1920],
+          precio: [3600, 2880, 2520, 2160],
           porcentajes: ["0%", "20%", "30%", "40%"],
         },
         {
@@ -18,15 +18,15 @@ const listaAbr2023 = {
           titulo: "Go Adicional",
           precio: 450,
         },
-        { titulo: "Futbol", precio: 2060 },
+        { titulo: "Futbol", precio: 2800 },
         { titulo: "HBO", precio: 1215 },
         { titulo: "Adultos", precio: 300 },
-        { titulo: "IP Fija", precio: 4000 },
+        { titulo: "IP Fija", precio: 4560 },
       ],
       Internet: [
         {
           titulo: "Internet 50MB",
-          precio: [4290, 3432, 3003, 2570],
+          precio: [4900, 3920, 3430, 2940],
           porcentajes: ["0%", "20%", "30%", "40%"],
         },
         {
