@@ -18,7 +18,7 @@ const listaAbr2023 = {
           titulo: "Go Adicional",
           precio: 450,
         },
-        { titulo: "Futbol", precio: 2800 },
+        { titulo: "Futbol", precio: 3030 },
         { titulo: "HBO", precio: 1215 },
         { titulo: "Adultos", precio: 300 },
         { titulo: "IP Fija", precio: 4560 },
@@ -87,7 +87,7 @@ const listaAbr2023 = {
           precio: 370,
   
         },
-        { titulo: "Futbol", precio: 2800 },
+        { titulo: "Futbol", precio: 3030 },
         { titulo: "HBO", precio: 1215 },
         { titulo: "Adultos", precio: 300 },
         { titulo: "IP Fija", precio: 4560 },
