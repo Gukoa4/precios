@@ -361,7 +361,9 @@ lugar.addEventListener("click", (e) => {
         if (elemento.id === "SSJ") {
             ihtml = `<h3>Importante</h3>
           <p>En el UI-668 del servicio 50 megas FTTH de San Salvador no impactan políticas de retención</p>
-          <p>Se debe migrar al UI-732 para que las políticas impacten sobre la facturación</p>`;
+          <p>Se debe migrar al UI-732 para que las políticas impacten sobre la facturación</p>
+          <p>UI-740 de 100 megas se debe migrar a UI-776</p>
+          `;
         } else {
             ihtml = ` <h3>Importante</h3> <p> En el UI-471 del servicio 50 megas FTTH de Palpala no impactan políticas de retención</p>
           <p>Se debe migrar al UI-719 para que las políticas impacten sobre la facturación</p>
