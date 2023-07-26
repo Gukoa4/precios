@@ -16,8 +16,8 @@ const retencion = {
         ["50/25 FTTH Bridge", "UI-736", "731", "746", "838",'-'],
         ["100/50 FTTH Router", "UI-740 migrar a 776", "732", "747", "839",'-'],
         ["100/50 FTTH Bridge", "UI-744", "733", "748", "840",'-'],
-        ["Nuevo 100/50 FTTH Router", "UI-776", "959", "961", "964",'-'],
-        ["Nuevo 100/50 FTTH Bridge", "UI-792", "960", "962", "965",'-'],
+        ["Nuevo 100/50 FTTH Router", "UI-776", "959", "1053", "-",'-'],
+        ["Nuevo 100/50 FTTH Bridge", "UI-792", "960", "-", "-",'-'],
     ],
     Palpala: [
         [
