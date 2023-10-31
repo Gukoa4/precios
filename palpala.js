@@ -59,7 +59,7 @@ const listaNov2023 = {
         },
         {
           titulo: "Go",
-          precio: [4000, 2800, 2400],
+          precio: [400, 280, 240],
           porcentajes: ["0%", "30%", "40%"],
         },
         {
