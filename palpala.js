@@ -1,4 +1,104 @@
-
+/*********************************
+ * Noviembre**
+ **********************************/
+const listaNov2023 = {
+    listaSalvador: {
+      Cable: [
+        {
+          titulo: "TV",
+          precio: [5400, 3780, 378],
+          porcentajes: ["0%", "30%", "40%"],
+        },
+        {
+          titulo: "Go",
+          precio: [890, 623, 534],
+          porcentajes: ["0%", "30%", "40%"],
+        },
+        {
+          titulo: "Go Adicional",
+          precio: 540,
+        },
+        { titulo: "Futbol", precio: 4390 },
+        { titulo: "HBO", precio: 1930 },
+        { titulo: "Adultos", precio: 360 },
+      ],
+      Internet: [
+        {
+          titulo: "Internet 50MB",
+          precio: [7080, 4956, 4248],
+          porcentajes: ["0%","30%", "40%"],
+        },
+        {
+          titulo: "Internet 100MB",
+          precio: [8280, 5796, 4968],
+          porcentajes: ["0%", "30%", "40%"],
+        },
+        {
+          titulo: "Internet 300MB",
+          precio: [10660, 7128, 8316],
+          porcentajes: ["0%", "30%", "40%"],
+        },
+        {
+          titulo: "Internet 500MB",
+          precio: [36580, 21948, 21948],
+          porcentajes: ["0%", "30%", "40%"],
+        },     
+        {
+            titulo: "Internet 600MB",
+          precio: [15480, 10836, 9288],
+            porcentajes: ["0%", "30%", "40%"],
+          },  
+      ],
+    },
+    listaPalpala: {
+      Cable: [
+        {
+          titulo: "TV",
+          precio: [3960, 2772, 2376],
+          porcentajes: ["0%", "30%", "40%"],
+        },
+        {
+          titulo: "Go",
+          precio: [4000, 2800, 2400],
+          porcentajes: ["0%", "30%", "40%"],
+        },
+        {
+          titulo: "Go Adicional",
+          precio: 890,
+  
+        },
+        { titulo: "Futbol", precio: 4390 },
+        { titulo: "HBO", precio: 1930 },
+        { titulo: "Adultos", precio: 360 },
+      ],
+      Internet: [
+        {
+          titulo: "Internet 50MB",
+          precio: [5940, 3948, 3384],
+          porcentajes: ["0%", "30%", "40%"],
+        },
+        {
+          titulo: "Internet 100MB",
+          precio: [8280, 4968, 3384],
+          porcentajes: ["0%", "30%", "40%"],
+        },
+        {
+          titulo: "Internet 200MB",
+          precio: [10740,7518,6444],
+          porcentajes: ["0%", "30%", "40%"],
+        },
+        {
+          titulo: "Internet 300MB",
+          precio: [11880, 8316, 7128],
+          porcentajes: ["0%", "30%", "40%"],
+        },
+        {
+          titulo: "Internet 20MB",
+          precio: 5100,
+        },
+      ],
+    },
+  };
 
 /*********************************
  * Septiembre**
@@ -774,6 +874,7 @@ let localidad = document.querySelector("#localidad");
 let listaMes = document.querySelector("#lista");
 
 let obListas = {
+  listaNov2023,
     listaSep2023,
   listaAbr2023,
   listaDic2022,
