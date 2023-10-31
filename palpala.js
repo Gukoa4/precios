@@ -59,12 +59,12 @@ const listaNov2023 = {
         },
         {
           titulo: "Go",
-          precio: [400, 280, 240],
+          precio: [890, 623, 534],
           porcentajes: ["0%", "30%", "40%"],
         },
         {
           titulo: "Go Adicional",
-          precio: 890,
+          precio: 450,
   
         },
         { titulo: "Futbol", precio: 4390 },
