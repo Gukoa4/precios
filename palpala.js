@@ -74,7 +74,7 @@ const listaNov2023 = {
       Internet: [
         {
           titulo: "Internet 50MB",
-          precio: [5940, 3948, 3384],
+          precio: [5640, 3948, 3384],
           porcentajes: ["0%", "30%", "40%"],
         },
         {
