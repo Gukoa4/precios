@@ -6,8 +6,8 @@ const listaNov2023 = {
       Cable: [
         {
           titulo: "TV",
-          precio: [5400, 3780, 378],
-          porcentajes: ["0%", "30%", "40%"],
+          precio: [5400, 3780, 3240,2700],
+          porcentajes: ["0%", "30%", "40%", "50%"],
         },
         {
           titulo: "Go",
@@ -25,8 +25,8 @@ const listaNov2023 = {
       Internet: [
         {
           titulo: "Internet 50MB",
-          precio: [7080, 4956, 4248],
-          porcentajes: ["0%","30%", "40%"],
+          precio: [7080, 4956, 4248,3540],
+          porcentajes: ["0%","30%", "40%", "50%"],
         },
         {
           titulo: "Internet 100MB",
@@ -54,8 +54,8 @@ const listaNov2023 = {
       Cable: [
         {
           titulo: "TV",
-          precio: [3960, 2772, 2376],
-          porcentajes: ["0%", "30%", "40%"],
+          precio: [3960, 2772, 2376,1980],
+          porcentajes: ["0%", "30%", "40%", "50%"],
         },
         {
           titulo: "Go",
@@ -74,8 +74,8 @@ const listaNov2023 = {
       Internet: [
         {
           titulo: "Internet 50MB",
-          precio: [5640, 3948, 3384],
-          porcentajes: ["0%", "30%", "40%"],
+          precio: [5640, 3948, 3384,2820],
+          porcentajes: ["0%", "30%", "40%","50%"],
         },
         {
           titulo: "Internet 100MB",
