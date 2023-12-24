@@ -1,4 +1,110 @@
 /*********************************
+ * Enero 2024**
+ **********************************/
+const listaEne2024 = {
+    listaSalvador: {
+        Cable: [
+            {
+                titulo: "TV",
+                precio: [7560,5292,4536,3780],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Go",
+                precio: [1250,875,750],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Go Adicional",
+                precio: 760,
+            },
+            { titulo: "Futbol", precio: 4390 },
+            { titulo: "HBO", precio: 1930 },
+            { titulo: "Adultos", precio: 500 },
+        ],
+        Internet: [
+            {
+                titulo: "Internet 50MB",
+                precio: [9910,6937,5946,4955],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Internet 100MB",
+                precio: [11590,8113.,6954],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 300MB",
+                precio: [16630,11641,9978],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 500MB",
+                precio:[51210,35847,30726],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 600MB",
+                precio: [21670,15169,13002],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+        ],
+    },
+    listaPalpala: {
+        Cable: [
+            {
+                titulo: "TV",
+                precio: [5540,3878,3324,2770],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Go",
+                precio: [1250,875,750],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Go Adicional",
+                precio: 450,
+
+            },
+            { titulo: "Futbol", precio: 4390 },
+            { titulo: "HBO", precio: 1930 },
+            { titulo: "Adultos", precio: 360 },
+        ],
+        Internet: [
+            {
+                titulo: "Internet 50MB",
+                precio: [7900,5530,4740,3950],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Internet 100MB",
+                precio: [11590,8113,6954],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 200MB",
+                precio:[15050,10535,9030],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 300MB",
+                precio: [16630,11641,9978],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 600MB",
+                precio: [21670,15169,13002],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 20MB",
+                precio: 7140,
+            },
+        ],
+    },
+};
+/*********************************
  * Noviembre**
  **********************************/
 const listaNov2023 = {
