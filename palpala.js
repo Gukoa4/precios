@@ -980,6 +980,7 @@ let localidad = document.querySelector("#localidad");
 let listaMes = document.querySelector("#lista");
 
 let obListas = {
+    listaEne2024,
   listaNov2023,
     listaSep2023,
   listaAbr2023,
