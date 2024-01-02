@@ -5,12 +5,12 @@ const listaEne2024 = {
     listaSalvador: {
         Cable: [
             {
-                titulo: "TV",
+                titulo: "TV ui-666 ui-001",
                 precio: [7560,5292,4536,3780],
                 porcentajes: ["0%", "30%", "40%", "50%"],
             },
             {
-                titulo: "Go",
+                titulo: "Go ui-416",
                 precio: [1250,875,750],
                 porcentajes: ["0%", "30%", "40%"],
             },
@@ -24,12 +24,12 @@ const listaEne2024 = {
         ],
         Internet: [
             {
-                titulo: "Internet 50MB",
+                titulo: "Internet 50MB UI-728 UI-732",
                 precio: [9910,6937,5946,4955],
                 porcentajes: ["0%", "30%", "40%", "50%"],
             },
             {
-                titulo: "Internet 100MB",
+                titulo: "Internet 100MB ui-776",
                 precio: [11590,8113.,6954],
                 porcentajes: ["0%", "30%", "40%"],
             },
@@ -53,12 +53,12 @@ const listaEne2024 = {
     listaPalpala: {
         Cable: [
             {
-                titulo: "TV",
+                titulo: "TV UI-580",
                 precio: [5540,3878,3324,2770],
                 porcentajes: ["0%", "30%", "40%", "50%"],
             },
             {
-                titulo: "Go",
+                titulo: "Go UI-716",
                 precio: [1250,875,750],
                 porcentajes: ["0%", "30%", "40%"],
             },
@@ -73,12 +73,12 @@ const listaEne2024 = {
         ],
         Internet: [
             {
-                titulo: "Internet 50MB",
+                titulo: "Internet 50MB UI-719",
                 precio: [7900,5530,4740,3950],
                 porcentajes: ["0%", "30%", "40%", "50%"],
             },
             {
-                titulo: "Internet 100MB",
+                titulo: "Internet 100MB UI-788",
                 precio: [11590,8113,6954],
                 porcentajes: ["0%", "30%", "40%"],
             },
