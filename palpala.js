@@ -1,3 +1,120 @@
+
+/*********************************
+ * Enero 2024**
+ **********************************/
+const listaFeb2024 = {
+    listaSalvador: {
+        Cable: [
+            {
+                titulo: "TV ui-666 ui-001",
+                
+                precio: [8690,	6083,	5214,	4345],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Go ui-416",
+                precio: [1440	,1008	,864],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Go Adicional",
+                precio: 875,
+            },
+            { titulo: "Futbol", precio: 5300 },
+            { titulo: "HBO", precio: 1930 },
+            { titulo: "Adultos", precio: 500 },
+        ],
+        Internet: [
+            {
+                titulo: "Internet 50MB UI-728 UI-732",
+                precio: [9910,6937,5946,4955],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Internet 100MB ui-776",
+                13330	,9331	,7998
+                precio: [13330	,9331	,7998],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 300MB",
+                precio: [19124.5	,13387.15	,11474.7],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 500MB",
+                precio:[58900	,41230	,35340],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 600MB",
+                
+                precio: [24900	,17430	,14940],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+        ],
+    },
+    listaPalpala: {
+        Cable: [
+            {
+                titulo: "TV UI-580",                 
+                precio: [6370 	,4459,	3822	,3185],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Go UI-716",
+                precio: [1440	,1008	,864],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Go Adicional",
+                precio: 725,
+
+            },
+            { titulo: "Futbol", precio: 5300 },
+            { titulo: "HBO", precio: 1930 },
+            { titulo: "Adultos", precio: 360 },
+        ],
+        Internet: [
+            {
+                titulo: "Internet 50MB UI-719",
+                precio: [7900,5530,4740,3950],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Internet 100MB UI-788",
+                   
+                precio: [13330 ,	9331	,7998],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 200MB",
+                 
+                precio:[17310 	,12117,	10386],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 300MB",
+                 
+                precio: [19125, 	13387,	11474	],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 600MB",
+                  
+                precio: [24920 	,17444	,14952],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 20MB",
+                precio: 8210,
+            },
+        ],
+    },
+};
+
+
+
 /*********************************
  * Enero 2024**
  **********************************/
@@ -980,6 +1097,7 @@ let localidad = document.querySelector("#localidad");
 let listaMes = document.querySelector("#lista");
 
 let obListas = {
+    listaFeb2024,
     listaEne2024,
   listaNov2023,
     listaSep2023,
