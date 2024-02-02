@@ -32,7 +32,7 @@ const listaFeb2024 = {
             },
             {
                 titulo: "Internet 100MB ui-776",
-                13330	,9331	,7998
+
                 precio: [13330	,9331	,7998],
                 porcentajes: ["0%", "30%", "40%"],
             },
