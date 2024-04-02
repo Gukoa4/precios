@@ -1212,6 +1212,7 @@ let localidad = document.querySelector("#localidad");
 let listaMes = document.querySelector("#lista");
 
 let obListas = {
+    listaAbr2024,
     listaFeb2024,
     listaEne2024,
   listaNov2023,
