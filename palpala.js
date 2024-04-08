@@ -20,7 +20,7 @@ const listaAbr2024 = {
                 titulo: "Go Adicional",
                 precio: 1100,
             },
-            { titulo: "Futbol", precio: 6300 },
+            { titulo: "Futbol", precio: 7900 },
             { titulo: "HBO", precio: 3500 },
             { titulo: "Adultos", precio: 500 },
         ],
@@ -71,7 +71,7 @@ const listaAbr2024 = {
                 precio: 910,
 
             },
-            { titulo: "Futbol", precio: 6300 },
+            { titulo: "Futbol", precio: 7900 },
             { titulo: "HBO", precio: 3500 },
             { titulo: "Adultos", precio: 360 },
         ],
