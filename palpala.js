@@ -1,3 +1,117 @@
+/*********************************
+ * Junio 2024**
+ **********************************/
+const listaJun2024 = {
+    listaSalvador: {
+        Cable: [
+            {
+                titulo: "TV ui-666 ui-001",
+               
+                precio: [ 12999,	9099,	7799,	6500],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Go ui-416",
+                precio: [2160,	1512,	1296],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Go Adicional",
+                precio: 1320,
+            },
+            { titulo: "Futbol", precio: 9000 },
+            { titulo: "HBO", precio: 6055 },
+            { titulo: "Adultos", precio: 500 },
+        ],
+        Internet: [
+            {
+                titulo: "Internet 50MB UI-728 UI-732",
+                precio: [15500,	10850,	9300,	7750],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Internet 100MB ui-776",
+
+                precio: [20000,	14000,	12000],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 300MB",
+                precio: [28690,	20083,	17214],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 500MB",
+                precio:[88350,	61845,	53010],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 600MB",
+                
+                precio: [37500,	26250,	22500],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+        ],
+    },
+    listaPalpala: {
+        Cable: [
+            {
+                titulo: "TV UI-580",                 
+                precio: [9552,	6686,	5731,	4776],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Go UI-716",
+                precio: [2160,	1512,	1296],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Go Adicional",
+                precio: 1080,
+
+            },
+            { titulo: "Futbol", precio: 9000 },
+            { titulo: "HBO", precio: 6055 },
+            { titulo: "Adultos", precio: 500 },
+        ],
+        Internet: [
+            {
+                titulo: "Internet 50MB UI-719",
+                precio: [12325,	8628,	7395,	6163],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Internet 100MB UI-788",
+                   
+                precio: [20000,	14000,	12000],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 200MB",
+                 
+                precio:[25750,	18025,	15450],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 300MB",
+                 
+                precio: [28690,	20083,	17214],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 600MB",
+                  
+                precio: [37500,	26250, 	22500],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 20MB",
+                precio: 12325,
+            },
+        ],
+    },
+};
+
 
 /*********************************
  * Abril 2024**
