@@ -97,7 +97,7 @@ const listaJul2024 = {
             {
                 titulo: "Internet 100MB UI-788",
                    
-                precio: [24000	16800	14400],
+                precio: [24000	,16800	,14400],
                 porcentajes: ["0%", "30%", "40%"],
             },
             {
