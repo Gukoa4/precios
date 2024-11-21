@@ -21,7 +21,7 @@ const listaOct2024 = {
                 precio: 1780,
             },
             { titulo: "Futbol", precio: 12200 },
-            { titulo: "HBO", precio: 6055 },
+            { titulo: "HBO", precio: 7975 },
             { titulo: "Adultos", precio: 560 },
             { titulo: "REHABILITACION INTERNET/HD", precio: 3590 },
             { titulo: "GASTOS ADMINISTRATIVOS", precio: 1135 },
@@ -79,7 +79,7 @@ const listaOct2024 = {
 
             },
             { titulo: "Futbol", precio: 12200 },
-            { titulo: "HBO", precio: 6055 },
+            { titulo: "HBO", precio: 7975 },
             { titulo: "Adultos", precio: 6055 },
             { titulo: "REHABILITACION INTERNET/HD", precio: 3590 },
             { titulo: "GASTOS ADMINISTRATIVOS", precio: 1135 },
