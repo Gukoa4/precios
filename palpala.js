@@ -50,7 +50,7 @@ const listaDic2024 = {
             },
             {
                 titulo: "Internet 500MB",
-                precio:[129420	90594	77652],
+                precio:[129420,	90594	,77652],
                 porcentajes: ["0%", "30%", "40%"],
             },
             {
@@ -92,13 +92,13 @@ const listaDic2024 = {
         Internet: [
             {
                 titulo: "Internet 50MB UI-719",
-                precio: [16290	11403	9774	8145],
+                precio: [16290	,11403	,9774	,8145],
                 porcentajes: ["0%", "30%", "40%", "50%"],
             },
             {
                 titulo: "Internet 100MB UI-788",
                    
-                precio: [28990	20293	17394	14495],
+                precio: [28990	,20293	,17394	,14495],
                 porcentajes: ["0%", "30%", "40%", "50%"],
             },
             {
@@ -110,7 +110,7 @@ const listaDic2024 = {
             {
                 titulo: "Internet 300MB",
                  
-                precio: [38990	27293	23394],
+                precio: [38990	,27293	,23394],
                 porcentajes: ["0%", "30%", "40%"],
             },
             {
