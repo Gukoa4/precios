@@ -20,7 +20,7 @@ const listaDic2024 = {
                 titulo: "Go Adicional",
                 precio: 1940,
             },
-            { titulo: "Futbol", precio: 12200 },
+            { titulo: "Futbol", precio: 12700 },
             { titulo: "HBO", precio: 7975 },
             { titulo: "Adultos", precio: 1000 },
             { titulo: "REHABILITACION INTERNET/HD", precio: 3920 },
@@ -78,7 +78,7 @@ const listaDic2024 = {
                 precio:  1560 ,
 
             },
-            { titulo: "Futbol", precio: 12200 },
+            { titulo: "Futbol", precio: 12700 },
             { titulo: "HBO", precio: 7975 },
             { titulo: "Adultos", precio: 500 },
             { titulo: "REHABILITACION INTERNET/HD", precio: 3920 },
