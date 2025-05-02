@@ -1,5 +1,133 @@
 
 /*********************************
+ * Mayo 2025** 
+ **********************************/
+const listaMay2025 = {
+    listaSalvador: {
+        
+        Cable: [
+            {
+                titulo: "TV ui-666 ui-001",
+               
+                precio: [19940	,13958	,11964	,9970],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Go ui-416",
+                precio: [3170	,2219	,1902	,1585],
+                porcentajes: ["0%", "30%", "40%","50%"],
+            },
+            {
+                titulo: "Go Adicional",
+                precio: 1940,
+            },
+            { titulo: "Futbol", precio: 15200 },
+            { titulo: "HBO", precio: 8821 },
+            { titulo: "Adultos", precio: 1100 },
+            { titulo: "REHABILITACION INTERNET/HD", precio: 4280 },
+            { titulo: "GASTOS ADMINISTRATIVOS", precio: 1360 },
+                        {
+                titulo: "Reconexion",
+                precio: [5800,8300,10050],
+                porcentajes: ["1ra", "2da", "3ra"],
+            },
+        ],
+        Internet: [
+            {
+                titulo: "Internet 50MB UI-728 UI-732",
+                precio: [24750	,17325	,14850	,12375],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Internet 100MB ui-776",
+
+                precio: [31600	,22120	,18960	,15800],
+                porcentajes: ["0%", "30%", "40%","50%"],
+            },
+            {
+                titulo: "Internet 300MB",
+                precio: [42500	,29750	,25500],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 500MB",
+                precio:[141070	,98749	,84642],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 600MB",
+                
+                precio: [54390	,38073	,32634],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+        ],
+    },
+    listaPalpala: {
+        Cable: [
+            {
+                titulo: "TV UI-580",                 
+                precio: [12740	,8918	,7644	,6370],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Go UI-716",
+                precio: [3115	,2181	,1869,	1558],
+                porcentajes: ["0%", "30%", "40%", "50%"]
+            },
+            {
+                titulo: "Go Adicional",
+                precio:  1560 ,
+
+            },
+            { titulo: "Futbol", precio: 15200 },
+            { titulo: "HBO", precio: 8821 },
+            { titulo: "Adultos", precio: 1100 },
+            { titulo: "REHABILITACION INTERNET/HD", precio: 4280 },
+            { titulo: "GASTOS ADMINISTRATIVOS", precio: 1360 },
+                        {
+                titulo: "Reconexion",
+                precio: [5800,8300,10050],
+                porcentajes: ["1ra", "2da", "3ra"],
+            },
+        ],
+        Internet: [
+            {
+                titulo: "Internet 50MB UI-719",
+                precio: [17760	,12432	,10656	,8880],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Internet 100MB UI-788",
+                   
+                precio: [31600	,22120	,18960	,15800],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+            {
+                titulo: "Internet 200MB",
+                 
+                precio:[41120	,28784	,24672],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 300MB",
+                 
+                precio: [42500	,29750	,25500],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 600MB",
+                  
+                precio: [54390	,38073	,32634],
+                porcentajes: ["0%", "30%", "40%"],
+            },
+            {
+                titulo: "Internet 20MB",
+                precio: 17720,
+            },
+        ],
+    },
+};
+/*********************************
  * Abril 2025** 
  **********************************/
 const listaAbr2025 = {
@@ -2231,6 +2359,7 @@ let localidad = document.querySelector("#localidad");
 let listaMes = document.querySelector("#lista");
 
 let obListas = {
+    listaMay2025,
     listaAbr2025,
     listaMar2025,
     listaFeb2025,
