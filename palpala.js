@@ -9,44 +9,44 @@ const listaMay2025 = {
             {
                 titulo: "TV ui-666 ui-001",
                
-                precio: [19940	,13958	,11964	,9970],
+                precio: [21900	,15330	,13140	,10950],
                 porcentajes: ["0%", "30%", "40%", "50%"],
             },
             {
                 titulo: "Go ui-416",
-                precio: [3170	,2219	,1902	,1585],
+                precio: [3450	,2415	,2070	,1725],
                 porcentajes: ["0%", "30%", "40%","50%"],
             },
             {
                 titulo: "Go Adicional",
-                precio: 1940,
+                precio: 2110,
             },
             { titulo: "Futbol", precio: 15200 },
             { titulo: "HBO", precio: 8821 },
             { titulo: "Adultos", precio: 1100 },
-            { titulo: "REHABILITACION INTERNET/HD", precio: 4280 },
-            { titulo: "GASTOS ADMINISTRATIVOS", precio: 1360 },
+            { titulo: "REHABILITACION INTERNET/HD", precio: 4665 },
+            { titulo: "GASTOS ADMINISTRATIVOS", precio: 1490 },
                         {
                 titulo: "Reconexion",
-                precio: [5800,8300,10050],
+                precio: [6320,9050,10950],
                 porcentajes: ["1ra", "2da", "3ra"],
             },
         ],
         Internet: [
             {
                 titulo: "Internet 50MB UI-728 UI-732",
-                precio: [24750	,17325	,14850	,12375],
+                precio: [26978	,18884.6	,16186.8	,13489],
                 porcentajes: ["0%", "30%", "40%", "50%"],
             },
             {
                 titulo: "Internet 100MB ui-776",
 
-                precio: [31600	,22120	,18960	,15800],
+                precio: [34444	,24110.8	,20666.4	,17222],
                 porcentajes: ["0%", "30%", "40%","50%"],
             },
             {
                 titulo: "Internet 300MB",
-                precio: [42500	,29750	,25500],
+                precio: [43775	,30642.5	,26265],
                 porcentajes: ["0%", "30%", "40%"],
             },
             {
@@ -57,7 +57,7 @@ const listaMay2025 = {
             {
                 titulo: "Internet 600MB",
                 
-                precio: [54390	,38073	,32634],
+                precio: [56022	,39215.4	,33613.2],
                 porcentajes: ["0%", "30%", "40%"],
             },
         ],
@@ -66,63 +66,63 @@ const listaMay2025 = {
         Cable: [
             {
                 titulo: "TV UI-580",                 
-                precio: [12740	,8918	,7644	,6370],
+                precio: [13887	,9720.9	,8332.2	,6943.5],
                 porcentajes: ["0%", "30%", "40%", "50%"],
             },
             {
                 titulo: "Go UI-716",
-                precio: [3115	,2181	,1869,	1558],
+                precio: [3390	,2373	,2034	,1695],
                 porcentajes: ["0%", "30%", "40%", "50%"]
             },
             {
                 titulo: "Go Adicional",
-                precio:  1560 ,
+                precio:  1700 ,
 
             },
             { titulo: "Futbol", precio: 15200 },
             { titulo: "HBO", precio: 8821 },
             { titulo: "Adultos", precio: 1100 },
-            { titulo: "REHABILITACION INTERNET/HD", precio: 4280 },
-            { titulo: "GASTOS ADMINISTRATIVOS", precio: 1360 },
+            { titulo: "REHABILITACION INTERNET/HD", precio: 4665 },
+            { titulo: "GASTOS ADMINISTRATIVOS", precio: 1490 },
                         {
                 titulo: "Reconexion",
-                precio: [5800,8300,10050],
+                precio: [6320,9050,10950],
                 porcentajes: ["1ra", "2da", "3ra"],
             },
         ],
         Internet: [
             {
                 titulo: "Internet 50MB UI-719",
-                precio: [17760	,12432	,10656	,8880],
+                precio: [19350	,13545	,11610	,9675],
                 porcentajes: ["0%", "30%", "40%", "50%"],
             },
             {
                 titulo: "Internet 100MB UI-788",
                    
-                precio: [31600	,22120	,18960	,15800],
+                precio: [34444	,24110.8	,20666.4	,17222],
                 porcentajes: ["0%", "30%", "40%", "50%"],
             },
             {
                 titulo: "Internet 200MB",
                  
-                precio:[41120	,28784	,24672],
+                precio:[44820	,31374	,26892],
                 porcentajes: ["0%", "30%", "40%"],
             },
             {
                 titulo: "Internet 300MB",
                  
-                precio: [42500	,29750	,25500],
+                precio: [43775	,30642.5	,26265],
                 porcentajes: ["0%", "30%", "40%"],
             },
             {
                 titulo: "Internet 600MB",
                   
-                precio: [54390	,38073	,32634],
+                precio: [56022	,39215.4	,33613.2],
                 porcentajes: ["0%", "30%", "40%"],
             },
             {
                 titulo: "Internet 20MB",
-                precio: 17720,
+                precio: 19310,
             },
         ],
     },
