@@ -2486,6 +2486,7 @@ let localidad = document.querySelector("#localidad");
 let listaMes = document.querySelector("#lista");
 
 let obListas = {
+    listaAgo2025,
     listaMay2025,
     listaAbr2025,
     listaMar2025,
