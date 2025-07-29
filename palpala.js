@@ -21,7 +21,7 @@ const listaAgo2025 = {
                 precio: 2110,
             },
             { titulo: "Futbol", precio: 16270 },
-            { titulo: "HBO", precio: 8821 },
+            { titulo: "HBO", precio: 10160 },
             { titulo: "Adultos", precio: 1100 },
             { titulo: "REHABILITACION INTERNET/HD", precio: 4665 },
             { titulo: "GASTOS ADMINISTRATIVOS", precio: 1490 },
@@ -79,7 +79,7 @@ const listaAgo2025 = {
 
             },
             { titulo: "Futbol", precio: 16270 },
-            { titulo: "HBO", precio: 8821 },
+            { titulo: "HBO", precio: 10160 },
             { titulo: "Adultos", precio: 1100 },
             { titulo: "REHABILITACION INTERNET/HD", precio: 4665 },
             { titulo: "GASTOS ADMINISTRATIVOS", precio: 1490 },
