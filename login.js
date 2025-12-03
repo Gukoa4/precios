@@ -6,7 +6,7 @@ let login = ()=>{
 let verificar =(evt)=>{
     evt.preventDefault()
     let ValidEmail = document.querySelector('#username').value.trim() === 'elcuatro';
-    let ValidPassword = document.querySelector('#password').value.trim() === 'elcuatro2022';
+    let ValidPassword = document.querySelector('#password').value.trim() === 'florchuchis';
     if (ValidEmail === true && ValidPassword === true) { // if ValidEmail & ValidPassword
         document.querySelector('.valid').style.display = 'block';
         sessionStorage.setItem('logeado', true);
