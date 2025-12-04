@@ -98,7 +98,7 @@ const listaDic2025 = {
         ],
         Internet: [
             {
-                titulo: "Internet 50MB UI-719",
+                titulo: "Internet 50MB",
                 precio: [22101	,15510	,13292	,11077,9970],
                 porcentajes: ["0%", "30%", "40%", "50%","55%"],
             },
@@ -124,8 +124,8 @@ const listaDic2025 = {
                 titulo: "Internet 20MB",
                 precio: 22101,
             },
-                                    {
-                titulo: "Internet 100MB UI-788",
+            {
+                titulo: "Internet 100MB UI-945",
                    
                 precio: [37200	,26040	,22320	,18600],
                 porcentajes: ["0%", "30%", "40%", "50%"],
