@@ -46,19 +46,19 @@ const listaDic2025 = {
             {
                 titulo: "Internet 100MB ui-776",
 
-                precio: [39431,17744],
-                porcentajes: ["0%","55%"],
+                precio: [39431,27602,23659,19716,17750],
+                porcentajes: ["0%", "30%", "40%", "50%","55%"],
             },
             {
                 titulo: "Internet 300MB",
-                precio: [46402,	19953],
-                porcentajes: ["0%", "57%"],
+                precio: [46402,32481,27841,23201,	19950],
+                porcentajes: ["0%",  "30%", "40%", "50%","57%"],
             },
             {
                 titulo: "Internet 600MB",
                 
-                precio: [ 64130	,28859],
-                porcentajes: ["0%","55%"],
+                precio: [ 64130,44891,38478,	32065,28860],
+                porcentajes: ["0%", "30%", "40%", "50%","55%"],
             },
         ],
     },
