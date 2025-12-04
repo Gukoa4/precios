@@ -66,22 +66,92 @@ const listaDic2025 = {
         Cable: [
             {
                 titulo: "TV UI-580",                 
-                precio: [15000	,10500	,9000	,7500],
-                porcentajes: ["0%", "30%", "40%", "50%"],
+                precio: [15900	,111130	,7950	, 7155],
+                porcentajes: ["0%", "30%", "50%", "55%"],
             },
             {
                 titulo: "Go UI-716",
-                precio: [3660	,2562	,2196	,1830],
-                porcentajes: ["0%", "30%", "40%", "50%"]
+                precio: [3880	,3300	,2716	,2640,2330, 1640],
+                porcentajes: ["0%","15%", "30%","32%", "40%", "50%"]
             },
             {
                 titulo: "Go Adicional",
-                precio:  1840 ,
+                precio:  1950 ,
 
             },
-            { titulo: "Futbol", precio: 17700 },
+            { titulo: "Futbol", 
+             precio: [18230,9115] ,
+             porcentajes: ["0%","50%"],
+            },
+            { titulo: "HBO", 
+             precio: [10160,5080] ,
+             porcentajes: ["0%","50%"],
+            },
+            { titulo: "Adultos", precio:1500 },
+            { titulo: "REHABILITACION INTERNET/HD", precio: 5342 },
+            { titulo: "GASTOS ADMINISTRATIVOS", precio:1707  },
+                        {
+                titulo: "Reconexion",
+                precio: [7240	,10356	,12529],
+                porcentajes: ["1ra", "2da", "3ra"],
+            },
+        ],
+        Internet: [
+            {
+                titulo: "Internet 50MB UI-719",
+                precio: [22101	,15510	,13292	,11077,9970],
+                porcentajes: ["0%", "30%", "40%", "50%","55%"],
+            },
+            {
+                titulo: "Internet 100MB PALPALA UI-1121",
+                   
+                precio: [28000,12600],
+                porcentajes: ["0%", "55%"],
+            },
+            {
+                titulo: "Internet 300MB",
+                 
+                precio: [46402,20880],
+                porcentajes: ["0%",  "55%"],
+            },
+            {
+                titulo: "Internet 600MB",
+                  
+                precio: [64130	,28860],
+                porcentajes: ["0%", "55%"],
+            },
+            {
+                titulo: "Internet 20MB",
+                precio: 22101,
+            },
+                                    {
+                titulo: "Internet 100MB UI-788",
+                   
+                precio: [37200	,26040	,22320	,18600],
+                porcentajes: ["0%", "30%", "40%", "50%"],
+            },
+                        {
+                titulo: "Internet 200MB",
+                 
+                precio:[48410],
+                porcentajes: ["0%"],
+            },
+        ],
+    },
+     listaPerico: {
+        Cable: [
+            {
+                titulo: "TV UI-1126",                 
+                precio: [19000],
+                porcentajes: ["0%"],
+            },
+            {
+                titulo: "4GO APP X3 (PERICO)",
+                precio:  10000 ,
+            },
+            { titulo: "Futbol", precio: 18230 },
             { titulo: "HBO", precio: 10160 },
-            { titulo: "Adultos", precio:1200 },
+            { titulo: "Adultos", precio: 1500 },
             { titulo: "REHABILITACION INTERNET/HD", precio: 5040 },
             { titulo: "GASTOS ADMINISTRATIVOS", precio:1610  },
                         {
@@ -91,39 +161,26 @@ const listaDic2025 = {
             },
         ],
         Internet: [
+
             {
-                titulo: "Internet 50MB UI-719",
-                precio: [20900	,14630	,12540	,10450],
-                porcentajes: ["0%", "30%", "40%", "50%"],
-            },
-            {
-                titulo: "Internet 100MB UI-788",
-                   
-                precio: [37200	,26040	,22320	,18600],
-                porcentajes: ["0%", "30%", "40%", "50%"],
-            },
-            {
-                titulo: "Internet 200MB",
-                 
-                precio:[48410	,33887	,29046 ],
-                porcentajes: ["0%", "30%", "40%"],
+                titulo: "Internet 100MB UI-994",
+                
+                precio: [25830],
+                porcentajes: ["0%"],
             },
             {
                 titulo: "Internet 300MB",
                  
-                precio: [43775	,30642.5	,26265],
-                porcentajes: ["0%", "30%", "40%"],
+                precio: [28830	],
+                porcentajes: ["0%"],
             },
             {
                 titulo: "Internet 600MB",
                   
-                precio: [60500	,42350	,36300],
-                porcentajes: ["0%", "30%", "40%"],
+                precio: [31830	],
+                porcentajes: ["0%"],
             },
-            {
-                titulo: "Internet 20MB",
-                precio: 20850,
-            },
+
         ],
     },
 };
