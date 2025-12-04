@@ -8,8 +8,8 @@ const listaDic2025 = {
             {
                 titulo: "TV ui-666 ui-001",
                
-                precio: [25069,	17548,	12535,	11281],
-                porcentajes: ["0%", "30%", "50%", "55%"],
+                precio: [25069,	17548,15041	,12535,	11281],
+                porcentajes: ["0%", "30%", "40%","50%", "55%"],
             },
             {
                 titulo: "Go ui-416",
@@ -66,8 +66,8 @@ const listaDic2025 = {
         Cable: [
             {
                 titulo: "TV UI-580",                 
-                precio: [15900	,111130	,7950	, 7155],
-                porcentajes: ["0%", "30%", "50%", "55%"],
+                precio: [15900	,111130	,9540,7950	, 7155],
+                porcentajes: ["0%", "30%","40%", "50%", "55%"],
             },
             {
                 titulo: "Go UI-716",
@@ -105,20 +105,20 @@ const listaDic2025 = {
             {
                 titulo: "Internet 100MB PALPALA UI-1121",
                    
-                precio: [28000,12600],
-                porcentajes: ["0%", "55%"],
+                precio: [28000,19600,16800,14000,12600],
+                porcentajes: ["0%", "30%", "40%", "50%", "55%"],
             },
             {
                 titulo: "Internet 300MB",
                  
-                precio: [46402,20880],
-                porcentajes: ["0%",  "55%"],
+                precio: [46402,32481,27841,23201,20880],
+                porcentajes: ["0%",  "30%", "40%", "50%", "55%"],
             },
             {
                 titulo: "Internet 600MB",
                   
-                precio: [64130	,28860],
-                porcentajes: ["0%", "55%"],
+                precio: [64130	,44891,38478,32065,28860],
+                porcentajes: ["0%", "30%", "40%", "50%", "55%"],
             },
             {
                 titulo: "Internet 20MB",
