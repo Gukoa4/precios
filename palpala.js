@@ -103,9 +103,9 @@ const listaDic2025 = {
                 porcentajes: ["0%", "30%", "40%", "50%","55%"],
             },
             {
-                titulo: "Internet 100MB PALPALA UI-1121",
+                titulo: "Internet 100MB (Venta) UI-1121",
                    
-                precio: [28000,19600,16800,14000,12600],
+                precio: [28990	,20293	,17394	,14495,12600],
                 porcentajes: ["0%", "30%", "40%", "50%", "55%"],
             },
             {
@@ -127,7 +127,7 @@ const listaDic2025 = {
             {
                 titulo: "Internet 100MB UI-945",
                    
-                precio: [37200	,26040	,22320	,18600],
+                precio: [28990	,20293	,17394	,14495],
                 porcentajes: ["0%", "30%", "40%", "50%"],
             },
                         {
