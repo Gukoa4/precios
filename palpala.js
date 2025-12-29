@@ -105,8 +105,8 @@ const listaDic2025 = {
             {
                 titulo: "Internet 100MB (Venta) UI-1121",
                    
-                precio: [28990	,20293	,17394	,14495,12600],
-                porcentajes: ["0%", "30%", "40%", "50%", "55%"],
+                precio: [28990	,19600	,12600	],
+                porcentajes: ["0%","30%", "55%"],
             },
             {
                 titulo: "Internet 300MB",
@@ -121,14 +121,10 @@ const listaDic2025 = {
                 porcentajes: ["0%", "30%", "40%", "50%", "55%"],
             },
             {
-                titulo: "Internet 20MB",
-                precio: 22101,
-            },
-            {
                 titulo: "Internet 100MB UI-945",
                    
-                precio: [28990	,20293	,17394	,14495],
-                porcentajes: ["0%", "30%", "40%", "50%"],
+                precio: [28990	,26091	,23192,21743, 20293,17394],
+                porcentajes: ["0%", "10%","20%","25%","30%", "40%"],
             },
                         {
                 titulo: "Internet 200MB",
