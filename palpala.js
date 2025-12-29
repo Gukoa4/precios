@@ -105,7 +105,7 @@ const listaDic2025 = {
             {
                 titulo: "Internet 100MB (Venta) UI-1121",
                    
-                precio: [28990	,19600	,12600	],
+                precio: [28000	,19600	,12600	],
                 porcentajes: ["0%","30%", "55%"],
             },
             {
