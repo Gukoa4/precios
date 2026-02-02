@@ -21,14 +21,14 @@ const listaDic2025 = {
                 precio: 2417,
             },
             { titulo: "Futbol", 
-             precio: [18230,9115] ,
+             precio: [21490,10745] ,
              porcentajes: ["0%","50%"],
             },
             { titulo: "HBO", 
              precio: [10160,5080] ,
              porcentajes: ["0%","50%"],
             },
-            { titulo: "Adultos", precio: 1500 },
+            { titulo: "Adultos", precio: 2000 },
             { titulo: "REHABILITACION INTERNET/HD", precio: 5342 },
             { titulo: "GASTOS ADMINISTRATIVOS", precio: 1707 },
                         {
@@ -80,14 +80,14 @@ const listaDic2025 = {
 
             },
             { titulo: "Futbol", 
-             precio: [18230,9115] ,
+             precio: [21490,10745] ,
              porcentajes: ["0%","50%"],
             },
             { titulo: "HBO", 
              precio: [10160,5080] ,
              porcentajes: ["0%","50%"],
             },
-            { titulo: "Adultos", precio:1500 },
+            { titulo: "Adultos", precio:2000 },
             { titulo: "REHABILITACION INTERNET/HD", precio: 5342 },
             { titulo: "GASTOS ADMINISTRATIVOS", precio:1707  },
                         {
@@ -123,8 +123,8 @@ const listaDic2025 = {
             {
                 titulo: "Internet 100MB UI-945",
                    
-                precio: [28990	,26091	,23192,21743, 20293,17394],
-                porcentajes: ["0%", "10%","20%","25%","30%", "40%"],
+                precio: [39431,27602,23659,19716,17750],
+                porcentajes: ["0%", "30%", "40%", "50%","55%"],
             },
                         {
                 titulo: "Internet 200MB",
