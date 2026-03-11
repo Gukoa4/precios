@@ -80,7 +80,7 @@ const listaMar2026 = {
 
             },
             { titulo: "Futbol", 
-             precio: [22135					11068] ,
+             precio: [22135			,		11068] ,
              porcentajes: ["0%","50%"],
             },
             { titulo: "HBO", 
