@@ -1,4 +1,181 @@
 /*********************************
+ * Marzo 2026** 
+ **********************************/
+const listaMar2026 = {
+    listaSalvador: {
+        
+        Cable: [
+            {
+                titulo: "TV ui-666 ui-001",
+               
+                precio: [27070,		18949,		16242,	13535,	12182],
+                porcentajes: ["0%", "30%", "40%","50%", "55%"],
+            },
+            {
+                titulo: "Go ui-416",
+                precio: [4350,	3698,	3045,	2958,	2610,	2175],
+                porcentajes: ["0%","15%","30%" ,"32%", "40%","50%"],
+            },
+            {
+                titulo: "Go Adicional",
+                precio: 2660,
+            },
+            { titulo: "Futbol", 
+             precio: [22135			,		11068] ,
+             porcentajes: ["0%","50%"],
+            },
+            { titulo: "HBO", 
+             precio: [13230,					6615] ,
+             porcentajes: ["0%","50%"],
+            },
+            { titulo: "Adultos", precio: 2200 },
+            { titulo: "REHABILITACION INTERNET/HD", precio: 5880 },
+            { titulo: "GASTOS ADMINISTRATIVOS", precio: 1880 },
+                        {
+                titulo: "Reconexion",
+                precio: [7970,11390,13780],
+                porcentajes: ["1ra", "2da", "3ra"],
+            },
+        ],
+        Internet: [
+            {
+                titulo: "Internet 50MB UI-728 UI-732",
+                precio: [33370	,	23359	,	20022	,16685,	15017],
+                porcentajes: ["0%", "30%", "40%", "50%","55%"],
+            },
+            {
+                titulo: "Internet 100MB ui-776",
+
+                precio: [42590	,	29813	,	25554	,21295	,19166],
+                porcentajes: ["0%", "30%", "40%", "50%","55%"],
+            },
+            {
+                titulo: "Internet 300MB",
+                precio: [50110	,	35077,		30066	,25055	,	21547],
+                porcentajes: ["0%",  "30%", "40%", "50%","57%"],
+            },
+            {
+                titulo: "Internet 600MB",
+                
+                precio: [ 69260	,	48482	,	41556	,34630	,31167],
+                porcentajes: ["0%", "30%", "40%", "50%","55%"],
+            },
+        ],
+    },
+    listaPalpala: {
+        Cable: [
+            {
+                titulo: "TV UI-580",                 
+                precio: [17490,		12243		,10494,	8745,	7871],
+                porcentajes: ["0%", "30%","40%", "50%", "55%"],
+            },
+            {
+                titulo: "Go UI-716",
+                precio: [4270	,3630	,2989	,2904,	2562,	2135],
+                porcentajes: ["0%","15%", "30%","32%", "40%", "50%"]
+            },
+            {
+                titulo: "Go Adicional",
+                precio:  2145 ,
+
+            },
+            { titulo: "Futbol", 
+             precio: [22135					11068] ,
+             porcentajes: ["0%","50%"],
+            },
+            { titulo: "HBO", 
+             precio: [13230		,			6615] ,
+             porcentajes: ["0%","50%"],
+            },
+            { titulo: "Adultos", precio:2200 },
+            { titulo: "REHABILITACION INTERNET/HD", precio: 5880 },
+            { titulo: "GASTOS ADMINISTRATIVOS", precio:1880  },
+                        {
+                titulo: "Reconexion",
+                precio: [7970,11390,13780],
+                porcentajes: ["1ra", "2da", "3ra"],
+            },
+        ],
+        Internet: [
+            {
+                titulo: "Internet 50MB",
+                precio: [24370	,	17059,		14622,	12185,	10967],
+                porcentajes: ["0%", "30%", "40%", "50%","55%"],
+            },
+            {
+                titulo: "Internet 100MB (Venta) UI-1121",
+                   
+                precio: [30800		,21560		,	13860],
+                porcentajes: ["0%","30%", "55%"],
+            },
+            {
+                titulo: "Internet 300MB",
+                 
+                precio: [50110		,35077	,	30066,	25055	,	21547],
+                porcentajes: ["0%",  "30%", "40%", "50%", "55%"],
+            },
+            {
+                titulo: "Internet 600MB",
+                  
+                precio: [69260,		48482,		41556,	34630	,31167],
+                porcentajes: ["0%", "30%", "40%", "50%", "55%"],
+            },
+            {
+                titulo: "Internet 100MB UI-945",
+                   
+                precio: [42590	,	29813	,	25554,	21295	,19166],
+                porcentajes: ["0%", "30%", "40%", "50%","55%"],
+            },
+        ],
+    },
+     listaPerico: {
+        Cable: [
+            {
+                titulo: "TV UI-1126",                 
+                precio: [19000],
+                porcentajes: ["0%"],
+            },
+            {
+                titulo: "4GO APP X3 (PERICO)",
+                precio:  10000 ,
+            },
+            { titulo: "Futbol", precio: 22135 },
+            { titulo: "HBO", precio: 13230 },
+            { titulo: "Adultos", precio: 2200 },
+            { titulo: "REHABILITACION INTERNET/HD", precio: 5040 },
+            { titulo: "GASTOS ADMINISTRATIVOS", precio:1610  },
+                        {
+                titulo: "Reconexion",
+                precio: [6830	,9770	,11820],
+                porcentajes: ["1ra", "2da", "3ra"],
+            },
+        ],
+        Internet: [
+
+            {
+                titulo: "Internet 100MB UI-994",
+                
+                precio: [25830],
+                porcentajes: ["0%"],
+            },
+            {
+                titulo: "Internet 300MB",
+                 
+                precio: [28830	],
+                porcentajes: ["0%"],
+            },
+            {
+                titulo: "Internet 600MB",
+                  
+                precio: [31830	],
+                porcentajes: ["0%"],
+            },
+
+        ],
+    },
+};
+
+/*********************************
  * Diciembre 2025** 
  **********************************/
 const listaDic2025 = {
@@ -2926,6 +3103,7 @@ let localidad = document.querySelector("#localidad");
 let listaMes = document.querySelector("#lista");
 
 let obListas = {
+    listaMar2026,
     listaDic2025,
     listaNov2025,
     listaSep2025,
