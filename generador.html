@@ -53,6 +53,12 @@
     padding: 4px 9px; cursor: pointer; transition: all 0.15s;
   }
   .reset-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+  .clear-btn {
+    font-family: var(--mono); font-size: 0.62rem; color: var(--muted);
+    background: none; border: 1px solid var(--border); border-radius: 5px;
+    padding: 4px 9px; cursor: pointer; transition: all 0.15s;
+  }
+  .clear-btn:hover { border-color: var(--accent2); color: #fff; background: var(--accent2); }
 
   /* LEFT PANEL */
   .panel-left { border-right: 1px solid var(--border); overflow-y: auto; display: flex; flex-direction: column; }
@@ -280,6 +286,68 @@
   .confirm-del-btns { display: flex; gap: 6px; }
   .confirm-yes { background: var(--accent2); border: none; border-radius: 5px; padding: 4px 12px; color: #fff; font-family: var(--sans); font-size: 0.68rem; font-weight: 700; cursor: pointer; }
   .confirm-no { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 4px 10px; color: var(--muted); font-family: var(--sans); font-size: 0.68rem; cursor: pointer; }
+
+  /* ── VIEW TABS ── */
+  .view-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); background: var(--surface); }
+  .view-tab {
+    padding: 10px 18px; background: none; border: none;
+    border-bottom: 2px solid transparent; color: var(--muted);
+    font-family: var(--sans); font-size: 0.75rem; font-weight: 700;
+    cursor: pointer; transition: all 0.18s; text-transform: uppercase; letter-spacing: 0.05em;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .view-tab.active { color: var(--text); border-bottom-color: var(--accent); }
+  .view-tab .tab-count {
+    background: rgba(108,99,255,0.18); color: var(--accent);
+    font-size: 0.6rem; border-radius: 10px; padding: 1px 6px; font-family: var(--mono);
+  }
+  .view-tab.active .tab-count { background: var(--accent); color: #fff; }
+
+  /* ── TABLE VIEW ── */
+  .table-output { flex: 1; overflow: auto; padding: 16px; display: none; }
+  .table-output.active { display: block; }
+  .json-output.active { display: block; }
+  .json-output { display: none; }
+
+  .table-section { margin-bottom: 28px; }
+  .table-section-title {
+    font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .table-section-title::after { content:''; flex:1; height:1px; background: var(--border); }
+
+  .price-table {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--mono); font-size: 0.72rem;
+  }
+  .price-table th {
+    background: var(--surface); color: var(--muted);
+    font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 7px 12px; text-align: left; border-bottom: 1px solid var(--border);
+    white-space: nowrap; position: sticky; top: 0; z-index: 2;
+  }
+  .price-table th.pct-col { text-align: right; color: var(--accent2); }
+  .price-table td {
+    padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: middle;
+  }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .td-name { color: var(--text); font-weight: 500; font-family: var(--sans); font-size: 0.73rem; }
+  .td-city { color: var(--muted); font-size: 0.62rem; }
+  .td-price { text-align: right; color: var(--accent3); }
+  .td-price.base { color: var(--text); font-weight: 600; }
+  .td-price.empty { color: var(--muted); font-style: italic; }
+  .td-cat {
+    font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 2px 6px; border-radius: 3px; white-space: nowrap;
+  }
+  .td-cat.cable { background: rgba(108,99,255,0.15); color: var(--accent); }
+  .td-cat.internet { background: rgba(67,233,123,0.12); color: var(--accent3); }
+
+  .table-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 10px; color: var(--muted); font-family: var(--mono); font-size: 0.76rem; }
 </style>
 </head>
 <body>
@@ -292,6 +360,7 @@
       <div class="session-dot" id="sessionDot"></div>
       <span id="sessionLabel">sin cambios</span>
     </div>
+    <button class="clear-btn" onclick="clearSelection()">🗑 Borrar selección</button>
     <button class="reset-btn" onclick="resetData()">↺ Restablecer</button>
   </div>
 </header>
@@ -320,11 +389,21 @@
 
 <div class="panel-right">
   <div class="output-header">
-    <div class="output-title"><div class="dot"></div>JSON Output · en vivo</div>
+    <div class="view-tabs">
+      <button class="view-tab active" id="tabJSON" onclick="switchView('json')">
+        { } JSON <span class="tab-count" id="jsonTabCount">0</span>
+      </button>
+      <button class="view-tab" id="tabTable" onclick="switchView('table')">
+        ⊞ Tabla <span class="tab-count" id="tableTabCount">0</span>
+      </button>
+    </div>
     <button class="copy-btn" id="copyBtn" onclick="copyJSON()">📋 Copiar JSON</button>
   </div>
-  <div class="json-output" id="jsonOutput">
+  <div class="json-output active" id="jsonOutput">
     <div class="empty-state"><div class="empty-icon">{ }</div><div>Seleccioná ciudad y productos para comenzar</div></div>
+  </div>
+  <div class="table-output" id="tableOutput">
+    <div class="table-empty"><div class="empty-icon">⊞</div><div>Seleccioná productos para ver la tabla</div></div>
   </div>
   <div class="summary-bar">
     Ciudad: <span id="sumCity">—</span>
@@ -441,6 +520,13 @@ function saveSession() {
     sessionStorage.setItem(SESSION_KEY, JSON.stringify(DATA));
     markSaved(true);
   } catch(e) {}
+}
+
+function clearSelection() {
+  if (!confirm('¿Borrar toda la selección actual?')) return;
+  allSelected = {};
+  renderProducts();
+  updateJSON();
 }
 
 function resetData() {
@@ -886,11 +972,16 @@ function updateJSON() {
   const json = buildJSON();
   const n    = totalSelected();
   document.getElementById('sumCount').textContent = n;
+  // update tab counts
+  document.getElementById('jsonTabCount').textContent = n;
+  document.getElementById('tableTabCount').textContent = n;
   if (!json || n === 0) {
     out.innerHTML = `<div class="empty-state"><div class="empty-icon">{ }</div><div>${!currentCity ? 'Seleccioná una ciudad y productos para comenzar' : 'Seleccioná al menos un producto'}</div></div>`;
+    if (currentView === 'table') renderTable();
     return;
   }
   out.innerHTML = `<pre>${syntaxHighlight(json)}</pre>`;
+  if (currentView === 'table') renderTable();
 }
 
 function copyJSON() {
@@ -900,6 +991,97 @@ function copyJSON() {
     btn.textContent = '✅ Copiado!'; btn.classList.add('copied');
     setTimeout(() => { btn.textContent = '📋 Copiar JSON'; btn.classList.remove('copied'); }, 2000);
   });
+}
+
+
+// ─── VIEW SWITCHING ───────────────────────────────────────────────────────────
+let currentView = 'json';
+
+function switchView(view) {
+  currentView = view;
+  document.getElementById('jsonOutput').classList.toggle('active', view === 'json');
+  document.getElementById('tableOutput').classList.toggle('active', view === 'table');
+  document.getElementById('tabJSON').classList.toggle('active', view === 'json');
+  document.getElementById('tabTable').classList.toggle('active', view === 'table');
+  if (view === 'table') renderTable();
+}
+
+// ─── TABLE RENDER ─────────────────────────────────────────────────────────────
+function renderTable() {
+  const container = document.getElementById('tableOutput');
+  const json = buildJSON();
+  if (!json || totalSelected() === 0) {
+    container.innerHTML = '<div class="table-empty"><div class="empty-icon">⊞</div><div>Seleccioná productos para ver la tabla</div></div>';
+    return;
+  }
+
+  // Collect all unique porcentajes across everything selected
+  // Build rows: one row per product, columns = [Ciudad, Cat, Producto, precio@0%, precio@pct1, ...]
+  // Group by city+cat sections, each with its own header row showing the pcts
+
+  let html = '';
+
+  Object.entries(json).forEach(([cityKey, cats]) => {
+    const cityName = { listaSalvador:'Salvador', listaPalpala:'Palpalá', listaPerico:'Perico' }[cityKey] || cityKey;
+
+    Object.entries(cats).forEach(([cat, prods]) => {
+      if (!prods.length) return;
+
+      // Collect all unique pct labels for this section
+      // porcentajes arrays per product may differ — we need a union
+      const allPcts = new Set();
+      prods.forEach(p => {
+        if (Array.isArray(p.porcentajes)) p.porcentajes.forEach(pct => allPcts.add(pct));
+        else if (!Array.isArray(p.precio)) allPcts.add('fijo');
+      });
+      const pctCols = [...allPcts];
+
+      const catClass = cat === 'Cable' ? 'cable' : 'internet';
+
+      html += `<div class="table-section">`;
+      html += `<div class="table-section-title">
+        <span class="td-cat ${catClass}">${cat}</span>
+        ${cityName}
+      </div>`;
+      html += `<table class="price-table"><thead><tr>
+        <th>Producto</th>
+        ${pctCols.map(p => `<th class="pct-col">${p}</th>`).join('')}
+      </tr></thead><tbody>`;
+
+      prods.forEach(prod => {
+        const isFixed = !Array.isArray(prod.precio);
+        html += `<tr>`;
+        html += `<td class="td-name">${prod.titulo}</td>`;
+
+        if (isFixed) {
+          // single price, spans all cols
+          html += `<td class="td-price base" colspan="${pctCols.length}">$${Number(prod.precio).toLocaleString('es-AR')}</td>`;
+        } else {
+          // map each pct col to the price
+          const pctMap = {};
+          if (prod.porcentajes && prod.precio) {
+            prod.porcentajes.forEach((pct, i) => { pctMap[pct] = prod.precio[i]; });
+          }
+
+          pctCols.forEach((pct, ci) => {
+            const val = pctMap[pct];
+            if (val == null) {
+              html += `<td class="td-price empty">—</td>`;
+            } else {
+              const isBase = pct === '0%';
+              html += `<td class="td-price${isBase ? ' base' : ''}">$${Number(val).toLocaleString('es-AR')}</td>`;
+            }
+          });
+        }
+
+        html += `</tr>`;
+      });
+
+      html += `</tbody></table></div>`;
+    });
+  });
+
+  container.innerHTML = html;
 }
 
 init();
