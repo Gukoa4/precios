@@ -385,11 +385,36 @@
   .table-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 10px; color: var(--muted); font-family: var(--mono); font-size: 0.76rem; }
 
   /* ── LIGHT THEME COMPONENT OVERRIDES ── */
+
+  /* Global font size boost in light mode */
+  html.light body { font-size: 15px; }
+  html.light .product-name { font-size: 0.88rem; }
+  html.light .price-input { font-size: 0.85rem; }
+  html.light .pct-row-label { font-size: 0.8rem; }
+  html.light .pct-row-price { font-size: 0.85rem; }
+  html.light .base-label { font-size: 0.78rem; }
+  html.light .price-badge { font-size: 0.78rem; }
+  html.light .pct-preset-btn { font-size: 0.75rem; }
+  html.light .pct-custom-input { font-size: 0.82rem; }
+  html.light .pct-add-btn { font-size: 0.8rem; }
+  html.light .section-label { font-size: 0.75rem; }
+  html.light .city-btn { font-size: 0.88rem; padding: 11px 6px; }
+  html.light .cat-tab { font-size: 0.9rem; padding: 13px; }
+  html.light .add-prod-input { font-size: 0.85rem; }
+  html.light .view-tab { font-size: 0.88rem; }
+  html.light .summary-bar { font-size: 0.78rem; }
+  html.light .price-table { font-size: 0.88rem; }
+  html.light .price-table th { font-size: 0.75rem; padding: 9px 14px; }
+  html.light .price-table td { padding: 10px 14px; }
+  html.light .td-name { font-size: 0.88rem; }
+  html.light pre { font-size: 0.88rem; }
+
+  /* Header: bordo */
   html.light header { background: var(--tbl-header); border-bottom-color: #5a1f44; }
   html.light header h1 { color: #ffffff; }
   html.light header h1 span { color: #f0d0e0; }
   html.light .logo { background: rgba(255,255,255,0.2); }
-  html.light .session-badge { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.8); }
+  html.light .session-badge { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.85); }
   html.light .session-dot { background: #ffc857; }
   html.light .session-dot.saved { background: #43e97b; }
   html.light .theme-btn { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.3); }
@@ -399,45 +424,71 @@
   html.light .reset-btn { color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.25); }
   html.light .reset-btn:hover { border-color: #ffaaaa; color: #ffaaaa; }
 
-  html.light .section-label { background: #f8f0f4; color: #9b2d5e; border-bottom-color: var(--border); }
-  html.light .city-btn { background: #f8f0f4; border-color: #d4a0bc; color: #7b2d5e; }
-  html.light .city-btn:hover { border-color: #9b2d5e; color: #5a1f44; }
+  /* Left panel */
+  html.light .panel-left { background: #f4f4f4; border-right: 1px solid #d0d0d0; }
+  html.light .section-label { background: #f8f0f4; color: #9b2d5e; border-bottom-color: #d0d0d0; }
+  html.light .city-grid { background: #f4f4f4; }
+  html.light .city-btn { background: #f8f0f4; border-color: #d4a0bc; color: #7b2d5e; font-weight: 700; }
+  html.light .city-btn:hover { border-color: #9b2d5e; color: #5a1f44; background: #f0e0ea; }
   html.light .city-btn.active { background: var(--tbl-header); border-color: var(--tbl-header); color: #fff; }
 
+  html.light .cat-tabs { background: #fff; border-bottom: 1px solid #d0d0d0; }
   html.light .cat-tab { color: #999; }
   html.light .cat-tab.active { color: var(--tbl-header); border-bottom-color: var(--tbl-header); }
 
-  html.light .add-product-bar { background: #faf5f8; border-bottom-color: var(--border); }
+  html.light .add-product-bar { background: #faf5f8; border-bottom: 1px solid #d0d0d0; }
+  html.light .add-prod-input { background: #fff; border-color: #ccc; color: #1a1a1a; }
+  html.light .add-prod-input:focus { border-color: var(--tbl-header); }
+  html.light .add-prod-type { background: #fff; border-color: #ccc; color: #555; }
   html.light .add-prod-btn { background: var(--tbl-header); }
   html.light .add-prod-btn:hover { background: #5a1f44; }
 
-  html.light .product-item { background: #ffffff; border-color: #ddd; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  html.light .product-item.selected { border-color: #1a7a4a; }
-  html.light .product-item.editing-name { border-color: #c97d00; }
-  html.light .product-check { border-color: #ccc; }
-  html.light .product-item.selected .product-check { background: #1a7a4a; border-color: #1a7a4a; }
-  html.light .product-name { color: #1a1a1a; }
-  html.light .price-badge { background: rgba(123,45,94,0.1); color: var(--tbl-header); }
-  html.light .price-input { background: #f8f8f8; border-color: #ccc; color: #1a1a1a; }
-  html.light .price-input:focus { border-color: var(--tbl-header); }
-  html.light .price-input.fixed-price { background: #f0f0f0; color: #888; }
+  html.light .products-list { background: #f4f4f4; }
 
+  /* Product items */
+  html.light .product-item { background: #fff; border: 1px solid #ddd; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  html.light .product-item.selected { border-color: #4dc8d0; box-shadow: 0 2px 6px rgba(77,200,208,0.2); }
+  html.light .product-item.editing-name { border-color: #c97d00; }
+  html.light .product-check { border: 2px solid #ccc; }
+  html.light .product-item.selected .product-check { background: #4dc8d0; border-color: #4dc8d0; }
+  html.light .product-name { color: #1a1a1a; }
+  html.light .edit-name-btn { color: #9b2d5e; }
+  html.light .delete-prod-btn { color: #e8806a; opacity: 0.5; }
+  html.light .delete-prod-btn:hover { opacity: 1; }
+  html.light .price-badge { background: rgba(77,200,208,0.15); color: #1a8a92; }
+
+  /* Product body inputs */
+  html.light .product-body { border-top: 1px solid #eee; }
+  html.light .base-label { color: #888; }
+  html.light .price-input { background: #f8f8f8; border-color: #ccc; color: #1a1a1a; }
+  html.light .price-input:focus { border-color: #4dc8d0; }
+  html.light .price-input.fixed-price { background: #f0f0f0; color: #888; }
   html.light .pct-divider { color: #aaa; }
   html.light .pct-divider::before, html.light .pct-divider::after { background: #ddd; }
-  html.light .pct-row { background: #f8f8f8; }
-  html.light .pct-row:hover { border-color: #ccc; }
-  html.light .pct-row-label { color: #c0392b; }
-  html.light .pct-row-price { color: #1a7a4a; }
-  html.light .pct-row-price.pending { color: #aaa; }
-  html.light .pct-preset-btn { background: #f4f4f4; border-color: #ddd; color: #888; }
-  html.light .pct-preset-btn:hover { border-color: var(--tbl-header); color: var(--tbl-header); }
-  html.light .pct-preset-btn.used { border-color: #a0d0b8; color: #1a7a4a; }
-  html.light .pct-add-btn { background: rgba(123,45,94,0.1); border-color: rgba(123,45,94,0.3); color: var(--tbl-header); }
-  html.light .pct-add-btn:hover { background: var(--tbl-header); color: #fff; border-color: var(--tbl-header); }
-  html.light .pct-custom-input { background: #f8f8f8; border-color: #ccc; color: #1a1a1a; }
-  html.light .pct-empty { color: #aaa; }
 
-  html.light .output-header { background: #f8f0f4; border-bottom-color: var(--border); }
+  /* Pct rows: salmon */
+  html.light .pct-row { background: #fff8f6; border: 1px solid #f0d0c8; }
+  html.light .pct-row:hover { border-color: #e8806a; }
+  html.light .pct-row-label { color: #e8806a; font-weight: 700; }
+  html.light .pct-row-arrow { color: #f0c0b0; }
+  html.light .pct-row-price { color: #1a8a92; font-weight: 600; }
+  html.light .pct-row-price.pending { color: #ccc; }
+  html.light .pct-row-del { color: #e8806a; opacity: 0.5; }
+  html.light .pct-row-del:hover { opacity: 1; background: rgba(232,128,106,0.1); }
+  html.light .pct-empty { color: #ccc; }
+
+  /* Presets: salmon */
+  html.light .pct-preset-btn { background: #fff8f6; border: 1px solid #f0c8b8; color: #e8806a; }
+  html.light .pct-preset-btn:hover { background: #e8806a; border-color: #e8806a; color: #fff; }
+  html.light .pct-preset-btn.used { background: rgba(77,200,208,0.1); border-color: rgba(77,200,208,0.4); color: #1a8a92; opacity: 0.8; }
+  html.light .pct-custom-input { background: #fff; border-color: #f0c8b8; color: #1a1a1a; }
+  html.light .pct-custom-input:focus { border-color: #e8806a; }
+  html.light .pct-add-btn { background: rgba(232,128,106,0.1); border: 1px solid rgba(232,128,106,0.35); color: #e8806a; }
+  html.light .pct-add-btn:hover { background: #e8806a; color: #fff; border-color: #e8806a; }
+
+  /* Right panel */
+  html.light .panel-right { background: #f9f9f9; }
+  html.light .output-header { background: #f8f0f4; border-bottom: 1px solid #d0d0d0; }
   html.light .view-tabs { background: #f8f0f4; }
   html.light .view-tab { color: #aaa; }
   html.light .view-tab.active { color: var(--tbl-header); border-bottom-color: var(--tbl-header); }
@@ -445,38 +496,38 @@
   html.light .view-tab.active .tab-count { background: var(--tbl-header); color: #fff; }
   html.light .copy-btn { background: var(--tbl-header); }
   html.light .copy-btn:hover { background: #5a1f44; }
-  html.light .copy-btn.copied { background: #1a7a4a; color: #fff; }
+  html.light .copy-btn.copied { background: #4dc8d0; color: #fff; }
 
-  html.light .json-output pre { color: #333; }
+  /* JSON syntax highlight light */
+  html.light pre { color: #333; }
   html.light .json-key { color: #7b2d5e; }
   html.light .json-string { color: #2060a0; }
-  html.light .json-number { color: #1a7a4a; }
-  html.light .json-pct { color: #c0392b; }
+  html.light .json-number { color: #1a8a92; }
+  html.light .json-pct { color: #e8806a; }
   html.light .json-bracket { color: #aaa; }
 
-  html.light .summary-bar { background: #f8f0f4; border-top-color: var(--border); color: #888; }
+  html.light .summary-bar { background: #f8f0f4; border-top: 1px solid #d0d0d0; color: #888; }
   html.light .summary-bar span { color: var(--tbl-header); }
-  html.light .prodLabel { background: #f8f0f4; }
 
-  /* table light */
-  html.light .price-table th { background: #f0e8ec; color: #9b2d5e; }
-  html.light .price-table td { border-bottom-color: #eee; }
+  /* Table view */
+  html.light .table-output { background: #f9f9f9; }
+  html.light .table-section-title { color: #999; }
+  html.light .table-section-title::after { background: #ddd; }
+  html.light .td-cat.cable { background: #4dc8d0; color: #fff; font-weight: 700; }
+  html.light .td-cat.internet { background: #e8806a; color: #fff; font-weight: 700; }
+  html.light .price-table th { background: #f0e8ec; color: #9b2d5e; border-bottom: 2px solid #d4a0bc; }
+  html.light .price-table th.pct-col { color: #e8806a; }
+  html.light .price-table tr:nth-child(even) td { background: #fafafa; }
+  html.light .price-table tr:nth-child(odd) td { background: #fff; }
   html.light .price-table tr:hover td { background: #faf5f8; }
-  html.light .td-name { color: #1a1a1a; }
-  html.light .td-price { color: #1a7a4a; }
-  html.light .td-price.base { color: #1a1a1a; }
-  html.light .td-price.empty { color: #bbb; }
-  html.light .td-cat.cable { background: rgba(77,200,208,0.15); color: #2a9098; }
-  html.light .td-cat.internet { background: rgba(232,128,106,0.15); color: #b05030; }
-  html.light .table-section-title { color: #888; }
+  html.light .price-table td { border-bottom: 1px solid #eee; }
+  html.light .td-name { color: #1a1a1a; font-weight: 600; }
+  html.light .td-price { color: #1a8a92; }
+  html.light .td-price.base { color: #1a1a1a; font-weight: 700; }
+  html.light .td-price.empty { color: #ccc; }
 
-  /* light table section headers use brand colors */
-  html.light .price-table thead { background: #f0e8ec; }
-
-  html.light .add-prod-input { background: #fff; border-color: #ccc; color: #1a1a1a; }
-  html.light .add-prod-type { background: #fff; border-color: #ccc; color: #555; }
-  html.light .panel-left { border-right-color: var(--border); }
-  html.light .products-list { background: var(--bg); }
+  html.light .empty-state { color: #aaa; }
+  html.light .table-empty { color: #aaa; }
 
 </style>
 </head>
@@ -548,19 +599,21 @@
 const BASE_DATA = {
   listaSalvador: {
     Cable: [
-      { titulo: "TV ui-666 ui-001", precio: [27070,18949,16242,13535,12182], porcentajes: ["0%","30%","40%","50%","55%"] },
-      { titulo: "Go ui-416", precio: [4350,3698,3045,2958,2610,2175], porcentajes: ["0%","15%","30%","32%","40%","50%"] },
+      { titulo: "TV UI-666 UI-001", precio: [27070,18949,16242,13535,12182], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Go UI-416", precio: [4350,3698,3045,2958,2610,2175], porcentajes: ["0%","15%","30%","32%","40%","50%"] },
       { titulo: "Go Adicional", precio: 2660 },
-      { titulo: "Futbol", precio: [22135,11068], porcentajes: ["0%","50%"] },
+      { titulo: "Fútbol", precio: [22135,11068], porcentajes: ["0%","50%"] },
       { titulo: "HBO", precio: [13230,6615], porcentajes: ["0%","50%"] },
       { titulo: "Adultos", precio: 2200 },
-      { titulo: "REHABILITACION INTERNET/HD", precio: 5880 },
-      { titulo: "GASTOS ADMINISTRATIVOS", precio: 1880 },
-      { titulo: "Reconexion", precio: [7970,11390,13780], porcentajes: ["1ra","2da","3ra"] },
+      { titulo: "Rehabilitación Internet/HD", precio: 5880 },
+      { titulo: "Gastos Administrativos", precio: 1880 },
+      { titulo: "1ra Reconexión", precio: 7970 },
+      { titulo: "2da Reconexión", precio: 11390 },
+      { titulo: "3ra Reconexión", precio: 13780 },
     ],
     Internet: [
       { titulo: "Internet 50MB UI-728 UI-732", precio: [33370,23359,20022,16685,15017], porcentajes: ["0%","30%","40%","50%","55%"] },
-      { titulo: "Internet 100MB ui-776", precio: [42590,29813,25554,21295,19166], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Internet 100MB UI-776", precio: [42590,29813,25554,21295,19166], porcentajes: ["0%","30%","40%","50%","55%"] },
       { titulo: "Internet 300MB", precio: [50110,35077,30066,25055,21547], porcentajes: ["0%","30%","40%","50%","57%"] },
       { titulo: "Internet 600MB", precio: [69260,48482,41556,34630,31167], porcentajes: ["0%","30%","40%","50%","55%"] },
     ],
@@ -570,12 +623,14 @@ const BASE_DATA = {
       { titulo: "TV UI-580", precio: [17490,12243,10494,8745,7871], porcentajes: ["0%","30%","40%","50%","55%"] },
       { titulo: "Go UI-716", precio: [4270,3630,2989,2904,2562,2135], porcentajes: ["0%","15%","30%","32%","40%","50%"] },
       { titulo: "Go Adicional", precio: 2145 },
-      { titulo: "Futbol", precio: [22135,11068], porcentajes: ["0%","50%"] },
+      { titulo: "Fútbol", precio: [22135,11068], porcentajes: ["0%","50%"] },
       { titulo: "HBO", precio: [13230,6615], porcentajes: ["0%","50%"] },
       { titulo: "Adultos", precio: 2200 },
-      { titulo: "REHABILITACION INTERNET/HD", precio: 5880 },
-      { titulo: "GASTOS ADMINISTRATIVOS", precio: 1880 },
-      { titulo: "Reconexion", precio: [7970,11390,13780], porcentajes: ["1ra","2da","3ra"] },
+      { titulo: "Rehabilitación Internet/HD", precio: 5880 },
+      { titulo: "Gastos Administrativos", precio: 1880 },
+      { titulo: "1ra Reconexión", precio: 7970 },
+      { titulo: "2da Reconexión", precio: 11390 },
+      { titulo: "3ra Reconexión", precio: 13780 },
     ],
     Internet: [
       { titulo: "Internet 50MB", precio: [24370,17059,14622,12185,10967], porcentajes: ["0%","30%","40%","50%","55%"] },
@@ -588,13 +643,15 @@ const BASE_DATA = {
   listaPerico: {
     Cable: [
       { titulo: "TV UI-1126", precio: [19000], porcentajes: ["0%"] },
-      { titulo: "4GO APP X3 (PERICO)", precio: 10000 },
-      { titulo: "Futbol", precio: 22135 },
+      { titulo: "4GO App X3 (PERICO)", precio: 10000 },
+      { titulo: "Fútbol", precio: 22135 },
       { titulo: "HBO", precio: 13230 },
       { titulo: "Adultos", precio: 2200 },
-      { titulo: "REHABILITACION INTERNET/HD", precio: 5040 },
-      { titulo: "GASTOS ADMINISTRATIVOS", precio: 1610 },
-      { titulo: "Reconexion", precio: [6830,9770,11820], porcentajes: ["1ra","2da","3ra"] },
+      { titulo: "Rehabilitación Internet/HD", precio: 5040 },
+      { titulo: "Gastos Administrativos", precio: 1610 },
+      { titulo: "1ra Reconexión", precio: 6830 },
+      { titulo: "2da Reconexión", precio: 9770 },
+      { titulo: "3ra Reconexión", precio: 11820 },
     ],
     Internet: [
       { titulo: "Internet 100MB UI-994", precio: [25830], porcentajes: ["0%"] },
