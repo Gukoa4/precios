@@ -1,31 +1,1241 @@
-{
-  "listaSalvador": {
-    "Cable": [
-      {
-        "titulo": "TV ui-666 ui-001",
-        "precio": null,
-        "porcentajes": [
-          "0%",
-          "15%",
-          "30%",
-          "40%",
-          "50%",
-          "55%"
-        ]
-      }
-    ],
-    "Internet": [
-      {
-        "titulo": "Internet 50MB UI-728 UI-732",
-        "precio": null,
-        "porcentajes": [
-          "0%",
-          "30%",
-          "40%",
-          "50%",
-          "55%"
-        ]
-      }
-    ]
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Constructor de Lista de Precios</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a40;
+    --accent: #6c63ff;
+    --accent2: #ff6584;
+    --accent3: #43e97b;
+    --accent4: #ffc857;
+    --text: #e8e8f0;
+    --muted: #6b6b8a;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Syne', sans-serif;
+    /* table colors dark */
+    --tbl-cable: #4dc8d0;
+    --tbl-internet: #e8806a;
+    --tbl-header: #7b2d5e;
+    --tbl-row-alt: rgba(255,255,255,0.03);
+    --tbl-row-base: rgba(255,255,255,0.01);
   }
+
+  /* ── LIGHT THEME ── */
+  html.light {
+    --bg: #eeeeee;
+    --surface: #ffffff;
+    --surface2: #f4f4f4;
+    --border: #d0d0d0;
+    --accent: #7b2d5e;
+    --accent2: #c0392b;
+    --accent3: #1a7a4a;
+    --accent4: #c97d00;
+    --text: #1a1a1a;
+    --muted: #777777;
+    --mono: 'Source Sans 3', sans-serif;
+    --sans: 'Source Sans 3', sans-serif;
+    /* table colors light */
+    --tbl-cable: #4dc8d0;
+    --tbl-internet: #e8806a;
+    --tbl-header: #7b2d5e;
+    --tbl-row-alt: #f0f7f5;
+    --tbl-row-base: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text); font-family: var(--sans);
+    min-height: 100vh; display: grid;
+    grid-template-columns: 450px 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh; overflow: hidden;
+  }
+
+  /* HEADER */
+  header {
+    grid-column: 1/-1; padding: 16px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 14px;
+    background: var(--surface);
+  }
+  .logo { width: 34px; height: 34px; background: var(--accent); border-radius: 8px; display: grid; place-items: center; font-size: 17px; }
+  header h1 { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.03em; }
+  header h1 span { color: var(--accent); }
+  .header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  .session-badge {
+    font-family: var(--mono); font-size: 0.62rem; color: var(--muted);
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 5px; padding: 4px 9px; display: flex; align-items: center; gap: 5px;
+  }
+  .session-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent4); }
+  .session-dot.saved { background: var(--accent3); }
+  .reset-btn {
+    font-family: var(--mono); font-size: 0.62rem; color: var(--muted);
+    background: none; border: 1px solid var(--border); border-radius: 5px;
+    padding: 4px 9px; cursor: pointer; transition: all 0.15s;
+  }
+  .reset-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+  .theme-btn {
+    font-family: var(--mono); font-size: 0.62rem; color: var(--muted);
+    background: none; border: 1px solid var(--border); border-radius: 5px;
+    padding: 4px 9px; cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .theme-btn:hover { border-color: var(--accent); color: var(--text); }
+  .clear-btn {
+    font-family: var(--mono); font-size: 0.62rem; color: var(--muted);
+    background: none; border: 1px solid var(--border); border-radius: 5px;
+    padding: 4px 9px; cursor: pointer; transition: all 0.15s;
+  }
+  .clear-btn:hover { border-color: var(--accent2); color: #fff; background: var(--accent2); }
+
+  /* LEFT PANEL */
+  .panel-left { border-right: 1px solid var(--border); overflow-y: auto; display: flex; flex-direction: column; }
+
+  .section-label {
+    font-family: var(--mono); font-size: 0.6rem; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--muted); padding: 10px 18px 7px;
+    border-bottom: 1px solid var(--border); background: var(--surface);
+  }
+
+  .city-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; padding: 10px; border-bottom: 1px solid var(--border); }
+  .city-btn {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 7px;
+    padding: 8px 5px; color: var(--muted); font-family: var(--sans); font-size: 0.72rem;
+    font-weight: 600; cursor: pointer; transition: all 0.18s; text-align: center;
+  }
+  .city-btn:hover { border-color: var(--accent); color: var(--text); }
+  .city-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .cat-tabs { display: flex; border-bottom: 1px solid var(--border); }
+  .cat-tab {
+    flex: 1; padding: 10px; background: none; border: none;
+    border-bottom: 2px solid transparent; color: var(--muted);
+    font-family: var(--sans); font-size: 0.76rem; font-weight: 700;
+    cursor: pointer; transition: all 0.18s; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .cat-tab.active { color: var(--text); border-bottom-color: var(--accent); }
+
+  /* ADD PRODUCT BAR */
+  .add-product-bar {
+    display: none; /* visible solo cuando hay ciudad seleccionada */
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    gap: 6px; align-items: center;
+    background: rgba(108,99,255,0.04);
+  }
+  .add-product-bar.visible { display: flex; }
+  .add-prod-input {
+    flex: 1; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 9px; color: var(--text);
+    font-family: var(--mono); font-size: 0.7rem; outline: none; transition: border-color 0.18s;
+  }
+  .add-prod-input:focus { border-color: var(--accent); }
+  .add-prod-type {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 7px; color: var(--muted); font-family: var(--mono); font-size: 0.68rem;
+    outline: none; cursor: pointer;
+  }
+  .add-prod-btn {
+    background: var(--accent); border: none; border-radius: 6px;
+    padding: 6px 12px; color: #fff; font-family: var(--sans); font-size: 0.68rem;
+    font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.15s;
+  }
+  .add-prod-btn:hover { background: #5a52d5; }
+
+  /* PRODUCTS LIST */
+  .products-list { flex: 1; padding: 9px; display: flex; flex-direction: column; gap: 5px; }
+
+  .product-item {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden; transition: border-color 0.2s;
+  }
+  .product-item.selected { border-color: var(--accent3); }
+  .product-item.editing-name { border-color: var(--accent4); }
+
+  .product-header { display: flex; align-items: center; gap: 8px; padding: 10px 12px; }
+
+  .product-check {
+    width: 16px; height: 16px; border-radius: 4px; border: 2px solid var(--border);
+    display: grid; place-items: center; transition: all 0.18s; flex-shrink: 0; cursor: pointer;
+  }
+  .product-item.selected .product-check { background: var(--accent3); border-color: var(--accent3); }
+  .check-icon { font-size: 9px; opacity: 0; transition: opacity 0.18s; }
+  .product-item.selected .check-icon { opacity: 1; }
+
+  /* NOMBRE EDITABLE */
+  .product-name-wrap { flex: 1; min-width: 0; display: flex; align-items: center; gap: 5px; }
+  .product-name {
+    font-size: 0.74rem; font-weight: 600; line-height: 1.3;
+    flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    cursor: pointer; border-radius: 4px; padding: 2px 4px; transition: background 0.15s;
+  }
+  .product-name:hover { background: rgba(255,255,255,0.05); }
+  .product-name-input {
+    flex: 1; background: rgba(255,200,87,0.08); border: 1px solid var(--accent4);
+    border-radius: 5px; padding: 3px 7px; color: var(--text);
+    font-family: var(--sans); font-size: 0.74rem; font-weight: 600; outline: none;
+    display: none;
+  }
+  .product-item.editing-name .product-name { display: none; }
+  .product-item.editing-name .product-name-input { display: block; }
+
+  .edit-name-btn {
+    background: none; border: none; color: var(--muted); cursor: pointer;
+    font-size: 0.65rem; padding: 2px 4px; opacity: 0.4; transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .edit-name-btn:hover { color: var(--accent4); opacity: 1; }
+  .product-item.editing-name .edit-name-btn { color: var(--accent4); opacity: 1; }
+
+  .delete-prod-btn {
+    background: none; border: none; color: var(--muted); cursor: pointer;
+    font-size: 0.65rem; padding: 2px 4px; opacity: 0.3; transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .delete-prod-btn:hover { color: var(--accent2); opacity: 1; }
+
+  .price-badge {
+    font-family: var(--mono); font-size: 0.64rem;
+    color: var(--accent); background: rgba(108,99,255,0.12);
+    padding: 2px 6px; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
+  }
+
+  /* BODY */
+  .product-body { display: none; padding: 0 12px 11px; flex-direction: column; gap: 7px; }
+  .product-item.selected .product-body { display: flex; }
+
+  .base-row { display: flex; align-items: center; gap: 7px; }
+  .base-label { font-family: var(--mono); font-size: 0.61rem; color: var(--muted); width: 66px; flex-shrink: 0; }
+  .price-input {
+    flex: 1; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 5px; padding: 5px 8px; color: var(--text);
+    font-family: var(--mono); font-size: 0.71rem; outline: none; transition: border-color 0.18s;
+  }
+  .price-input:focus { border-color: var(--accent); }
+  .price-input.fixed-price { color: var(--muted); background: rgba(255,255,255,0.02); cursor: default; }
+
+  .pct-divider {
+    display: flex; align-items: center; gap: 7px;
+    font-family: var(--mono); font-size: 0.55rem;
+    color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .pct-divider::before, .pct-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .pct-rows { display: flex; flex-direction: column; gap: 3px; }
+  .pct-row {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(0,0,0,0.22); border-radius: 5px; padding: 5px 8px;
+    border: 1px solid transparent; transition: border-color 0.15s;
+  }
+  .pct-row:hover { border-color: var(--border); }
+  .pct-row-label { font-family: var(--mono); font-size: 0.63rem; color: var(--accent2); width: 36px; flex-shrink: 0; text-align: right; }
+  .pct-row-arrow { color: var(--border); font-size: 0.58rem; flex-shrink: 0; }
+  .pct-row-price { flex: 1; font-family: var(--mono); font-size: 0.7rem; color: var(--accent3); }
+  .pct-row-price.pending { color: var(--muted); }
+  .pct-row-del {
+    background: none; border: none; color: var(--muted); cursor: pointer;
+    font-size: 0.65rem; padding: 2px 4px; opacity: 0.35; transition: all 0.15s; border-radius: 3px;
+  }
+  .pct-row-del:hover { color: var(--accent2); opacity: 1; background: rgba(255,101,132,0.1); }
+  .pct-empty { font-family: var(--mono); font-size: 0.61rem; color: var(--muted); padding: 3px 2px; font-style: italic; }
+
+  .add-pct-area { display: flex; flex-direction: column; gap: 4px; }
+  .presets-row { display: flex; flex-wrap: wrap; gap: 3px; }
+  .pct-preset-btn {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 2px 7px; color: var(--muted);
+    font-family: var(--mono); font-size: 0.6rem; cursor: pointer; transition: all 0.15s;
+  }
+  .pct-preset-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .pct-preset-btn.used { border-color: rgba(67,233,123,0.3); color: var(--accent3); opacity: 0.5; pointer-events: none; }
+
+  .custom-pct-row { display: flex; gap: 4px; align-items: center; }
+  .pct-custom-input {
+    width: 68px; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 5px; padding: 4px 7px; color: var(--text);
+    font-family: var(--mono); font-size: 0.68rem; outline: none; transition: border-color 0.18s;
+  }
+  .pct-custom-input:focus { border-color: var(--accent); }
+  .pct-add-btn {
+    background: rgba(108,99,255,0.16); border: 1px solid rgba(108,99,255,0.32);
+    border-radius: 5px; padding: 4px 10px; color: var(--accent);
+    font-family: var(--sans); font-size: 0.66rem; font-weight: 700;
+    cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  }
+  .pct-add-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* RIGHT PANEL */
+  .panel-right { display: flex; flex-direction: column; overflow: hidden; }
+  .output-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 20px; border-bottom: 1px solid var(--border); background: var(--surface);
+  }
+  .output-title { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent3); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
+  .copy-btn {
+    background: var(--accent); border: none; border-radius: 7px;
+    padding: 7px 15px; color: #fff; font-family: var(--sans); font-size: 0.73rem;
+    font-weight: 700; cursor: pointer; transition: all 0.18s;
+  }
+  .copy-btn:hover { background: #5a52d5; transform: translateY(-1px); }
+  .copy-btn.copied { background: var(--accent3); color: #000; }
+
+  .json-output { flex: 1; overflow-y: auto; padding: 20px; }
+  pre { font-family: var(--mono); font-size: 0.74rem; line-height: 1.75; white-space: pre-wrap; word-break: break-word; }
+  .json-key { color: #79b8ff; }
+  .json-string { color: #9ecbff; }
+  .json-number { color: var(--accent3); }
+  .json-pct { color: #f97583; }
+  .json-bracket { color: var(--muted); }
+
+  .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 10px; color: var(--muted); font-family: var(--mono); font-size: 0.76rem; }
+  .empty-icon { font-size: 2.6rem; opacity: 0.2; }
+
+  .summary-bar { display: flex; gap: 6px; padding: 8px 20px; background: var(--surface); border-top: 1px solid var(--border); font-family: var(--mono); font-size: 0.63rem; color: var(--muted); }
+  .summary-bar span { color: var(--accent); }
+
+  /* TOOLTIP hint */
+  .edit-hint { font-family: var(--mono); font-size: 0.57rem; color: var(--muted); padding: 0 2px; }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* Confirm delete */
+  .confirm-del {
+    display: none; position: absolute; background: var(--surface2);
+    border: 1px solid var(--accent2); border-radius: 8px;
+    padding: 10px 14px; font-family: var(--mono); font-size: 0.68rem;
+    color: var(--text); z-index: 100; box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    flex-direction: column; gap: 8px;
+  }
+  .confirm-del.show { display: flex; }
+  .confirm-del-btns { display: flex; gap: 6px; }
+  .confirm-yes { background: var(--accent2); border: none; border-radius: 5px; padding: 4px 12px; color: #fff; font-family: var(--sans); font-size: 0.68rem; font-weight: 700; cursor: pointer; }
+  .confirm-no { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 4px 10px; color: var(--muted); font-family: var(--sans); font-size: 0.68rem; cursor: pointer; }
+
+  /* ── VIEW TABS ── */
+  .view-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); background: var(--surface); }
+  .view-tab {
+    padding: 10px 18px; background: none; border: none;
+    border-bottom: 2px solid transparent; color: var(--muted);
+    font-family: var(--sans); font-size: 0.75rem; font-weight: 700;
+    cursor: pointer; transition: all 0.18s; text-transform: uppercase; letter-spacing: 0.05em;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .view-tab.active { color: var(--text); border-bottom-color: var(--accent); }
+  .view-tab .tab-count {
+    background: rgba(108,99,255,0.18); color: var(--accent);
+    font-size: 0.6rem; border-radius: 10px; padding: 1px 6px; font-family: var(--mono);
+  }
+  .view-tab.active .tab-count { background: var(--accent); color: #fff; }
+
+  /* ── TABLE VIEW ── */
+  .table-output { flex: 1; overflow: auto; padding: 16px; display: none; }
+  .table-output.active { display: block; }
+  .json-output.active { display: block; }
+  .json-output { display: none; }
+
+  .table-section { margin-bottom: 28px; }
+  .table-section-title {
+    font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .table-section-title::after { content:''; flex:1; height:1px; background: var(--border); }
+
+  .price-table {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--mono); font-size: 0.72rem;
+  }
+  .price-table th {
+    background: var(--surface); color: var(--muted);
+    font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 7px 12px; text-align: left; border-bottom: 1px solid var(--border);
+    white-space: nowrap; position: sticky; top: 0; z-index: 2;
+  }
+  .price-table th.pct-col { text-align: right; color: var(--accent2); }
+  .price-table td {
+    padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: middle;
+  }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .td-name { color: var(--text); font-weight: 500; font-family: var(--sans); font-size: 0.73rem; }
+  .td-city { color: var(--muted); font-size: 0.62rem; }
+  .td-price { text-align: right; color: var(--accent3); }
+  .td-price.base { color: var(--text); font-weight: 600; }
+  .td-price.empty { color: var(--muted); font-style: italic; }
+  .td-cat {
+    font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 2px 6px; border-radius: 3px; white-space: nowrap;
+  }
+  .td-cat.cable { background: rgba(108,99,255,0.15); color: var(--accent); }
+  .td-cat.internet { background: rgba(67,233,123,0.12); color: var(--accent3); }
+
+  .table-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 10px; color: var(--muted); font-family: var(--mono); font-size: 0.76rem; }
+
+  /* ── LIGHT THEME COMPONENT OVERRIDES ── */
+  html.light header { background: var(--tbl-header); border-bottom-color: #5a1f44; }
+  html.light header h1 { color: #ffffff; }
+  html.light header h1 span { color: #f0d0e0; }
+  html.light .logo { background: rgba(255,255,255,0.2); }
+  html.light .session-badge { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.8); }
+  html.light .session-dot { background: #ffc857; }
+  html.light .session-dot.saved { background: #43e97b; }
+  html.light .theme-btn { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.3); }
+  html.light .theme-btn:hover { border-color: #fff; color: #fff; }
+  html.light .clear-btn { color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.25); }
+  html.light .clear-btn:hover { background: rgba(255,255,255,0.2); color: #fff; border-color: #fff; }
+  html.light .reset-btn { color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.25); }
+  html.light .reset-btn:hover { border-color: #ffaaaa; color: #ffaaaa; }
+
+  html.light .section-label { background: #f8f0f4; color: #9b2d5e; border-bottom-color: var(--border); }
+  html.light .city-btn { background: #f8f0f4; border-color: #d4a0bc; color: #7b2d5e; }
+  html.light .city-btn:hover { border-color: #9b2d5e; color: #5a1f44; }
+  html.light .city-btn.active { background: var(--tbl-header); border-color: var(--tbl-header); color: #fff; }
+
+  html.light .cat-tab { color: #999; }
+  html.light .cat-tab.active { color: var(--tbl-header); border-bottom-color: var(--tbl-header); }
+
+  html.light .add-product-bar { background: #faf5f8; border-bottom-color: var(--border); }
+  html.light .add-prod-btn { background: var(--tbl-header); }
+  html.light .add-prod-btn:hover { background: #5a1f44; }
+
+  html.light .product-item { background: #ffffff; border-color: #ddd; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  html.light .product-item.selected { border-color: #1a7a4a; }
+  html.light .product-item.editing-name { border-color: #c97d00; }
+  html.light .product-check { border-color: #ccc; }
+  html.light .product-item.selected .product-check { background: #1a7a4a; border-color: #1a7a4a; }
+  html.light .product-name { color: #1a1a1a; }
+  html.light .price-badge { background: rgba(123,45,94,0.1); color: var(--tbl-header); }
+  html.light .price-input { background: #f8f8f8; border-color: #ccc; color: #1a1a1a; }
+  html.light .price-input:focus { border-color: var(--tbl-header); }
+  html.light .price-input.fixed-price { background: #f0f0f0; color: #888; }
+
+  html.light .pct-divider { color: #aaa; }
+  html.light .pct-divider::before, html.light .pct-divider::after { background: #ddd; }
+  html.light .pct-row { background: #f8f8f8; }
+  html.light .pct-row:hover { border-color: #ccc; }
+  html.light .pct-row-label { color: #c0392b; }
+  html.light .pct-row-price { color: #1a7a4a; }
+  html.light .pct-row-price.pending { color: #aaa; }
+  html.light .pct-preset-btn { background: #f4f4f4; border-color: #ddd; color: #888; }
+  html.light .pct-preset-btn:hover { border-color: var(--tbl-header); color: var(--tbl-header); }
+  html.light .pct-preset-btn.used { border-color: #a0d0b8; color: #1a7a4a; }
+  html.light .pct-add-btn { background: rgba(123,45,94,0.1); border-color: rgba(123,45,94,0.3); color: var(--tbl-header); }
+  html.light .pct-add-btn:hover { background: var(--tbl-header); color: #fff; border-color: var(--tbl-header); }
+  html.light .pct-custom-input { background: #f8f8f8; border-color: #ccc; color: #1a1a1a; }
+  html.light .pct-empty { color: #aaa; }
+
+  html.light .output-header { background: #f8f0f4; border-bottom-color: var(--border); }
+  html.light .view-tabs { background: #f8f0f4; }
+  html.light .view-tab { color: #aaa; }
+  html.light .view-tab.active { color: var(--tbl-header); border-bottom-color: var(--tbl-header); }
+  html.light .view-tab .tab-count { background: rgba(123,45,94,0.12); color: var(--tbl-header); }
+  html.light .view-tab.active .tab-count { background: var(--tbl-header); color: #fff; }
+  html.light .copy-btn { background: var(--tbl-header); }
+  html.light .copy-btn:hover { background: #5a1f44; }
+  html.light .copy-btn.copied { background: #1a7a4a; color: #fff; }
+
+  html.light .json-output pre { color: #333; }
+  html.light .json-key { color: #7b2d5e; }
+  html.light .json-string { color: #2060a0; }
+  html.light .json-number { color: #1a7a4a; }
+  html.light .json-pct { color: #c0392b; }
+  html.light .json-bracket { color: #aaa; }
+
+  html.light .summary-bar { background: #f8f0f4; border-top-color: var(--border); color: #888; }
+  html.light .summary-bar span { color: var(--tbl-header); }
+  html.light .prodLabel { background: #f8f0f4; }
+
+  /* table light */
+  html.light .price-table th { background: #f0e8ec; color: #9b2d5e; }
+  html.light .price-table td { border-bottom-color: #eee; }
+  html.light .price-table tr:hover td { background: #faf5f8; }
+  html.light .td-name { color: #1a1a1a; }
+  html.light .td-price { color: #1a7a4a; }
+  html.light .td-price.base { color: #1a1a1a; }
+  html.light .td-price.empty { color: #bbb; }
+  html.light .td-cat.cable { background: rgba(77,200,208,0.15); color: #2a9098; }
+  html.light .td-cat.internet { background: rgba(232,128,106,0.15); color: #b05030; }
+  html.light .table-section-title { color: #888; }
+
+  /* light table section headers use brand colors */
+  html.light .price-table thead { background: #f0e8ec; }
+
+  html.light .add-prod-input { background: #fff; border-color: #ccc; color: #1a1a1a; }
+  html.light .add-prod-type { background: #fff; border-color: #ccc; color: #555; }
+  html.light .panel-left { border-right-color: var(--border); }
+  html.light .products-list { background: var(--bg); }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">📋</div>
+  <h1>Constructor de <span>Lista de Precios</span></h1>
+  <div class="header-right">
+    <div class="session-badge">
+      <div class="session-dot" id="sessionDot"></div>
+      <span id="sessionLabel">sin cambios</span>
+    </div>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️ Modo claro</button>
+    <button class="clear-btn" onclick="clearSelection()">🗑 Borrar selección</button>
+    <button class="reset-btn" onclick="resetData()">↺ Restablecer</button>
+  </div>
+</header>
+
+<div class="panel-left">
+  <div class="section-label">📍 Ciudad</div>
+  <div class="city-grid" id="cityGrid"></div>
+  <div class="cat-tabs">
+    <button class="cat-tab active" data-cat="Cable" onclick="setCategory('Cable')">📺 Cable</button>
+    <button class="cat-tab" data-cat="Internet" onclick="setCategory('Internet')">🌐 Internet</button>
+  </div>
+
+  <!-- AGREGAR PRODUCTO -->
+  <div class="add-product-bar" id="addProductBar">
+    <input class="add-prod-input" id="newProdName" placeholder="Nombre del producto…" />
+    <select class="add-prod-type" id="newProdType">
+      <option value="variable">Con descuentos</option>
+      <option value="fixed">Precio fijo</option>
+    </select>
+    <button class="add-prod-btn" onclick="addProduct()">+ Agregar</button>
+  </div>
+
+  <div class="section-label" id="prodLabel">Seleccioná una ciudad</div>
+  <div class="products-list" id="productsList"></div>
+</div>
+
+<div class="panel-right">
+  <div class="output-header">
+    <div class="view-tabs">
+      <button class="view-tab active" id="tabJSON" onclick="switchView('json')">
+        { } JSON <span class="tab-count" id="jsonTabCount">0</span>
+      </button>
+      <button class="view-tab" id="tabTable" onclick="switchView('table')">
+        ⊞ Tabla <span class="tab-count" id="tableTabCount">0</span>
+      </button>
+    </div>
+    <button class="copy-btn" id="copyBtn" onclick="copyJSON()">📋 Copiar JSON</button>
+  </div>
+  <div class="json-output active" id="jsonOutput">
+    <div class="empty-state"><div class="empty-icon">{ }</div><div>Seleccioná ciudad y productos para comenzar</div></div>
+  </div>
+  <div class="table-output" id="tableOutput">
+    <div class="table-empty"><div class="empty-icon">⊞</div><div>Seleccioná productos para ver la tabla</div></div>
+  </div>
+  <div class="summary-bar">
+    Ciudad: <span id="sumCity">—</span>
+    &nbsp;·&nbsp; Cat: <span id="sumCat">Cable</span>
+    &nbsp;·&nbsp; Total seleccionados: <span id="sumCount">0</span>
+  </div>
+</div>
+
+<script>
+// ─── DATA BASE ────────────────────────────────────────────────────────────────
+const BASE_DATA = {
+  listaSalvador: {
+    Cable: [
+      { titulo: "TV ui-666 ui-001", precio: [27070,18949,16242,13535,12182], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Go ui-416", precio: [4350,3698,3045,2958,2610,2175], porcentajes: ["0%","15%","30%","32%","40%","50%"] },
+      { titulo: "Go Adicional", precio: 2660 },
+      { titulo: "Futbol", precio: [22135,11068], porcentajes: ["0%","50%"] },
+      { titulo: "HBO", precio: [13230,6615], porcentajes: ["0%","50%"] },
+      { titulo: "Adultos", precio: 2200 },
+      { titulo: "REHABILITACION INTERNET/HD", precio: 5880 },
+      { titulo: "GASTOS ADMINISTRATIVOS", precio: 1880 },
+      { titulo: "Reconexion", precio: [7970,11390,13780], porcentajes: ["1ra","2da","3ra"] },
+    ],
+    Internet: [
+      { titulo: "Internet 50MB UI-728 UI-732", precio: [33370,23359,20022,16685,15017], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Internet 100MB ui-776", precio: [42590,29813,25554,21295,19166], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Internet 300MB", precio: [50110,35077,30066,25055,21547], porcentajes: ["0%","30%","40%","50%","57%"] },
+      { titulo: "Internet 600MB", precio: [69260,48482,41556,34630,31167], porcentajes: ["0%","30%","40%","50%","55%"] },
+    ],
+  },
+  listaPalpala: {
+    Cable: [
+      { titulo: "TV UI-580", precio: [17490,12243,10494,8745,7871], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Go UI-716", precio: [4270,3630,2989,2904,2562,2135], porcentajes: ["0%","15%","30%","32%","40%","50%"] },
+      { titulo: "Go Adicional", precio: 2145 },
+      { titulo: "Futbol", precio: [22135,11068], porcentajes: ["0%","50%"] },
+      { titulo: "HBO", precio: [13230,6615], porcentajes: ["0%","50%"] },
+      { titulo: "Adultos", precio: 2200 },
+      { titulo: "REHABILITACION INTERNET/HD", precio: 5880 },
+      { titulo: "GASTOS ADMINISTRATIVOS", precio: 1880 },
+      { titulo: "Reconexion", precio: [7970,11390,13780], porcentajes: ["1ra","2da","3ra"] },
+    ],
+    Internet: [
+      { titulo: "Internet 50MB", precio: [24370,17059,14622,12185,10967], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Internet 100MB (Venta) UI-1121", precio: [30800,21560,13860], porcentajes: ["0%","30%","55%"] },
+      { titulo: "Internet 300MB", precio: [50110,35077,30066,25055,21547], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Internet 600MB", precio: [69260,48482,41556,34630,31167], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Internet 100MB UI-945", precio: [42590,29813,25554,21295,19166], porcentajes: ["0%","30%","40%","50%","55%"] },
+    ],
+  },
+  listaPerico: {
+    Cable: [
+      { titulo: "TV UI-1126", precio: [19000], porcentajes: ["0%"] },
+      { titulo: "4GO APP X3 (PERICO)", precio: 10000 },
+      { titulo: "Futbol", precio: 22135 },
+      { titulo: "HBO", precio: 13230 },
+      { titulo: "Adultos", precio: 2200 },
+      { titulo: "REHABILITACION INTERNET/HD", precio: 5040 },
+      { titulo: "GASTOS ADMINISTRATIVOS", precio: 1610 },
+      { titulo: "Reconexion", precio: [6830,9770,11820], porcentajes: ["1ra","2da","3ra"] },
+    ],
+    Internet: [
+      { titulo: "Internet 100MB UI-994", precio: [25830], porcentajes: ["0%"] },
+      { titulo: "Internet 300MB", precio: [28830], porcentajes: ["0%"] },
+      { titulo: "Internet 600MB", precio: [31830], porcentajes: ["0%"] },
+    ],
+  },
+};
+
+const CITY_MAP = { listaSalvador: 'Salvador', listaPalpala: 'Palpalá', listaPerico: 'Perico' };
+const PCT_PRESETS = ['15%','30%','32%','40%','45%','50%','55%','57%','60%'];
+const SESSION_KEY = 'lista_precios_data';
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let DATA = {};
+let currentCity = null;
+let currentCat  = 'Cable';
+let editingName = null;
+
+// allSelected[cityKey][cat][titulo] = { fixed, price, basePrice, pcts }
+let allSelected = {};
+
+function getSelected() {
+  if (!currentCity) return {};
+  if (!allSelected[currentCity]) allSelected[currentCity] = {};
+  if (!allSelected[currentCity][currentCat]) allSelected[currentCity][currentCat] = {};
+  return allSelected[currentCity][currentCat];
 }
+
+function totalSelected() {
+  let n = 0;
+  Object.values(allSelected).forEach(city =>
+    Object.values(city).forEach(cat => { n += Object.keys(cat).length; })
+  );
+  return n;
+}
+
+// ─── SESSION STORAGE ──────────────────────────────────────────────────────────
+function loadSession() {
+  try {
+    const raw = sessionStorage.getItem(SESSION_KEY);
+    if (raw) {
+      DATA = JSON.parse(raw);
+      markSaved(true);
+      return;
+    }
+  } catch(e) {}
+  DATA = JSON.parse(JSON.stringify(BASE_DATA)); // deep clone
+  markSaved(false);
+}
+
+function saveSession() {
+  try {
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(DATA));
+    markSaved(true);
+  } catch(e) {}
+}
+
+function clearSelection() {
+  if (!confirm('¿Borrar toda la selección actual?')) return;
+  allSelected = {};
+  renderProducts();
+  updateJSON();
+}
+
+function resetData() {
+  if (!confirm('¿Restablecer todos los productos a los valores originales? Esto borrará tus cambios de esta sesión.')) return;
+  sessionStorage.removeItem(SESSION_KEY);
+  DATA = JSON.parse(JSON.stringify(BASE_DATA));
+  allSelected = {};
+  markSaved(false);
+  renderProducts();
+  updateJSON();
+}
+
+function markSaved(saved) {
+  document.getElementById('sessionDot').className = 'session-dot' + (saved ? ' saved' : '');
+  document.getElementById('sessionLabel').textContent = saved ? 'guardado en sesión' : 'sin cambios guardados';
+}
+
+// ─── UTILS ────────────────────────────────────────────────────────────────────
+function normalizePct(str) {
+  const s = str.trim().replace('%','');
+  const n = parseFloat(s);
+  if (isNaN(n) || n <= 0 || n >= 100) return null;
+  return Number.isInteger(n) ? `${n}%` : `${n}%`;
+}
+
+function safeKey(t) { return t.replace(/[^a-zA-Z0-9]/g,'_'); }
+
+function getFactor(prod, pct) {
+  if (!Array.isArray(prod.precio)) return 1;
+  const idx = (prod.porcentajes || []).indexOf(pct);
+  if (idx !== -1) return prod.precio[idx] / prod.precio[0];
+  return 1 - parseFloat(pct) / 100;
+}
+
+function calcPrice(prod, pct, base) {
+  return Math.round(base * getFactor(prod, pct));
+}
+
+// Genera un título único si ya existe uno igual
+function uniqueTitle(city, cat, title) {
+  const list = DATA[city][cat];
+  const existing = list.map(p => p.titulo);
+  if (!existing.includes(title)) return title;
+  let i = 2;
+  while (existing.includes(`${title} (${i})`)) i++;
+  return `${title} (${i})`;
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+function init() {
+  loadSession();
+  loadTheme();
+  const grid = document.getElementById('cityGrid');
+  Object.entries(CITY_MAP).forEach(([key, name]) => {
+    const btn = document.createElement('button');
+    btn.className = 'city-btn'; btn.textContent = name; btn.dataset.key = key;
+    btn.onclick = () => setCity(key);
+    grid.appendChild(btn);
+  });
+  // Enter en agregar producto
+  document.getElementById('newProdName').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addProduct();
+  });
+}
+
+function setCity(key) {
+  currentCity = key; editingName = null;
+  document.querySelectorAll('.city-btn').forEach(b => b.classList.toggle('active', b.dataset.key === key));
+  document.getElementById('sumCity').textContent = CITY_MAP[key];
+  document.getElementById('addProductBar').classList.add('visible');
+  renderProducts(); updateJSON();
+}
+
+function setCategory(cat) {
+  currentCat = cat; editingName = null;
+  document.querySelectorAll('.cat-tab').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+  document.getElementById('sumCat').textContent = cat;
+  renderProducts(); updateJSON();
+}
+
+// ─── PRODUCTOS: CRUD ──────────────────────────────────────────────────────────
+function addProduct() {
+  if (!currentCity) return;
+  const nameInp = document.getElementById('newProdName');
+  const typeInp = document.getElementById('newProdType');
+  const name = nameInp.value.trim();
+  if (!name) { nameInp.style.borderColor='var(--accent2)'; setTimeout(()=>nameInp.style.borderColor='',700); return; }
+
+  const titulo = uniqueTitle(currentCity, currentCat, name);
+  const isFixed = typeInp.value === 'fixed';
+
+  const newProd = isFixed
+    ? { titulo, precio: 0 }
+    : { titulo, precio: [0], porcentajes: ["0%"] };
+
+  DATA[currentCity][currentCat].push(newProd);
+  nameInp.value = '';
+  saveSession();
+  renderProducts();
+  updateJSON();
+}
+
+function deleteProduct(titulo) {
+  if (!currentCity) return;
+  DATA[currentCity][currentCat] = DATA[currentCity][currentCat].filter(p => p.titulo !== titulo);
+  delete getSelected()[titulo];
+  if (editingName === titulo) editingName = null;
+  saveSession();
+  renderProducts();
+  updateJSON();
+}
+
+function startEditName(titulo) {
+  if (editingName === titulo) {
+    commitEditName(titulo);
+    return;
+  }
+  if (editingName) commitEditName(editingName);
+  editingName = titulo;
+  renderProducts();
+  // focus input
+  setTimeout(() => {
+    const inp = document.getElementById(`nameinp_${safeKey(titulo)}`);
+    if (inp) { inp.focus(); inp.select(); }
+  }, 30);
+}
+
+function commitEditName(titulo) {
+  const inp = document.getElementById(`nameinp_${safeKey(titulo)}`);
+  if (!inp) { editingName = null; return; }
+  const newName = inp.value.trim();
+  if (!newName || newName === titulo) { editingName = null; renderProducts(); return; }
+
+  // Renombrar en DATA
+  const prod = DATA[currentCity][currentCat].find(p => p.titulo === titulo);
+  if (prod) {
+    const oldTitle = prod.titulo;
+    prod.titulo = uniqueTitle(currentCity, currentCat, newName);
+    // Actualizar selected si estaba
+    const sel_ = getSelected();
+    if (sel_[oldTitle]) {
+      sel_[prod.titulo] = sel_[oldTitle];
+      delete sel_[oldTitle];
+    }
+  }
+  editingName = null;
+  saveSession();
+  renderProducts();
+  updateJSON();
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function renderProducts() {
+  const list = document.getElementById('productsList');
+  list.innerHTML = '';
+  if (!currentCity) return;
+
+  const products = DATA[currentCity][currentCat] || [];
+  document.getElementById('prodLabel').textContent = `Productos · ${CITY_MAP[currentCity]} · ${currentCat}`;
+
+  products.forEach(prod => {
+    const isFixed    = !Array.isArray(prod.precio);
+    const selected   = getSelected();
+    const isSelected = !!selected[prod.titulo];
+    const isEditing  = editingName === prod.titulo;
+    const sel        = selected[prod.titulo];
+
+    const item = document.createElement('div');
+    item.className = 'product-item'
+      + (isSelected ? ' selected' : '')
+      + (isEditing  ? ' editing-name' : '');
+
+    // ── HEADER ──
+    const header = document.createElement('div');
+    header.className = 'product-header';
+
+    // checkbox
+    const chk = document.createElement('div');
+    chk.className = 'product-check';
+    chk.innerHTML = '<span class="check-icon">✓</span>';
+    chk.onclick = () => toggleProduct(prod, item);
+
+    // nombre wrap
+    const nameWrap = document.createElement('div');
+    nameWrap.className = 'product-name-wrap';
+
+    const nm = document.createElement('div');
+    nm.className = 'product-name';
+    nm.textContent = prod.titulo;
+    nm.title = 'Click para seleccionar · doble click para editar nombre';
+    nm.onclick = () => toggleProduct(prod, item);
+    nm.ondblclick = (e) => { e.stopPropagation(); startEditName(prod.titulo); };
+
+    const nmInp = document.createElement('input');
+    nmInp.className = 'product-name-input';
+    nmInp.id = `nameinp_${safeKey(prod.titulo)}`;
+    nmInp.value = prod.titulo;
+    nmInp.onclick = e => e.stopPropagation();
+    nmInp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') commitEditName(prod.titulo);
+      if (e.key === 'Escape') { editingName = null; renderProducts(); }
+    });
+    nmInp.addEventListener('blur', () => {
+      // pequeño delay para no conflictuar con botón guardar
+      setTimeout(() => { if (editingName === prod.titulo) commitEditName(prod.titulo); }, 150);
+    });
+
+    nameWrap.append(nm, nmInp);
+
+    // botón editar nombre
+    const editBtn = document.createElement('button');
+    editBtn.className = 'edit-name-btn';
+    editBtn.title = isEditing ? 'Guardar nombre (Enter)' : 'Editar nombre (doble click)';
+    editBtn.textContent = isEditing ? '✓' : '✎';
+    editBtn.onclick = e => { e.stopPropagation(); startEditName(prod.titulo); };
+
+    // botón eliminar
+    const delBtn = document.createElement('button');
+    delBtn.className = 'delete-prod-btn';
+    delBtn.title = 'Eliminar producto';
+    delBtn.textContent = '🗑';
+    delBtn.onclick = e => {
+      e.stopPropagation();
+      if (confirm(`¿Eliminar "${prod.titulo}"?`)) deleteProduct(prod.titulo);
+    };
+
+    // badge
+    const badge = document.createElement('div');
+    badge.className = 'price-badge';
+    if (isFixed) {
+      badge.textContent = prod.precio > 0 ? `$${Number(prod.precio).toLocaleString('es-AR')}` : 'fijo';
+    } else if (isSelected) {
+      const total = 1 + (sel.pcts?.length || 0);
+      badge.textContent = `${total} precio${total !== 1 ? 's' : ''}`;
+    } else {
+      badge.textContent = `${prod.precio.length} precios`;
+    }
+
+    header.append(chk, nameWrap, editBtn, delBtn, badge);
+    item.appendChild(header);
+
+    // ── BODY ──
+    const body = document.createElement('div');
+    body.className = 'product-body';
+
+    if (isFixed) {
+      const row = document.createElement('div'); row.className = 'base-row';
+      const lbl = document.createElement('div'); lbl.className = 'base-label'; lbl.textContent = 'Precio fijo';
+      const inp = document.createElement('input');
+      inp.className = 'price-input'; inp.type = 'number';
+      inp.placeholder = 'Ingresá precio';
+      inp.value = prod.precio > 0 ? prod.precio : '';
+      inp.addEventListener('input', () => {
+        prod.precio = parseFloat(inp.value) || 0;
+        saveSession(); updateJSON();
+      });
+      row.append(lbl, inp); body.appendChild(row);
+
+    } else {
+      // precio base
+      const baseRow = document.createElement('div'); baseRow.className = 'base-row';
+      const baseLbl = document.createElement('div'); baseLbl.className = 'base-label'; baseLbl.textContent = '0% · base';
+      const baseInp = document.createElement('input');
+      baseInp.className = 'price-input'; baseInp.type = 'number'; baseInp.placeholder = 'Precio base';
+      if (sel?.basePrice) baseInp.value = sel.basePrice;
+      baseInp.addEventListener('input', () => onBasePrice(prod, parseFloat(baseInp.value)));
+      baseRow.append(baseLbl, baseInp);
+      body.appendChild(baseRow);
+
+      const divEl = document.createElement('div'); divEl.className = 'pct-divider'; divEl.textContent = 'descuentos';
+      body.appendChild(divEl);
+
+      const pctRowsEl = document.createElement('div'); pctRowsEl.className = 'pct-rows';
+      buildPctRows(prod, pctRowsEl, sel);
+      body.appendChild(pctRowsEl);
+
+      const addArea = document.createElement('div'); addArea.className = 'add-pct-area';
+      const presetsRow = document.createElement('div'); presetsRow.className = 'presets-row';
+      buildPresets(prod, presetsRow, sel);
+      addArea.appendChild(presetsRow);
+
+      const customRow = document.createElement('div'); customRow.className = 'custom-pct-row';
+      const cInp = document.createElement('input');
+      cInp.className = 'pct-custom-input'; cInp.type = 'text'; cInp.placeholder = 'ej: 45%';
+      const addBtn = document.createElement('button');
+      addBtn.className = 'pct-add-btn'; addBtn.textContent = '+ %';
+      const doAdd = () => {
+        const val = normalizePct(cInp.value);
+        if (!val) { cInp.style.borderColor='var(--accent2)'; setTimeout(()=>cInp.style.borderColor='',700); return; }
+        addPct(prod, val); cInp.value = '';
+      };
+      addBtn.onclick = doAdd;
+      cInp.addEventListener('keydown', e => { if(e.key==='Enter') doAdd(); });
+      customRow.append(cInp, addBtn);
+      addArea.appendChild(customRow);
+      body.appendChild(addArea);
+    }
+
+    item.appendChild(body);
+    list.appendChild(item);
+  });
+}
+
+function buildPctRows(prod, container, sel) {
+  container.innerHTML = '';
+  if (!sel || !sel.pcts || sel.pcts.length === 0) {
+    const empty = document.createElement('div'); empty.className = 'pct-empty';
+    empty.textContent = 'Sin descuentos — solo precio base';
+    container.appendChild(empty); return;
+  }
+  sel.pcts.forEach(pct => {
+    const row = document.createElement('div'); row.className = 'pct-row';
+    const lbl = document.createElement('div'); lbl.className = 'pct-row-label'; lbl.textContent = pct;
+    const arr = document.createElement('div'); arr.className = 'pct-row-arrow'; arr.textContent = '→';
+    const priceEl = document.createElement('div');
+    priceEl.className = 'pct-row-price' + (sel.basePrice ? '' : ' pending');
+    priceEl.id = `pp_${safeKey(prod.titulo)}_${pct.replace(/[^0-9]/g,'_')}`;
+    priceEl.textContent = sel.basePrice
+      ? `$${calcPrice(prod, pct, sel.basePrice).toLocaleString('es-AR')}`
+      : '— ingresá precio base';
+    const del = document.createElement('button'); del.className = 'pct-row-del';
+    del.textContent = '✕'; del.title = `Quitar ${pct}`;
+    del.onclick = e => { e.stopPropagation(); removePct(prod, pct); };
+    row.append(lbl, arr, priceEl, del);
+    container.appendChild(row);
+  });
+}
+
+function buildPresets(prod, container, sel) {
+  container.innerHTML = '';
+  PCT_PRESETS.forEach(p => {
+    const btn = document.createElement('button');
+    const used = sel?.pcts?.includes(p);
+    btn.className = 'pct-preset-btn' + (used ? ' used' : '');
+    btn.textContent = p;
+    if (!used) btn.onclick = () => addPct(prod, p);
+    container.appendChild(btn);
+  });
+}
+
+// ─── ACCIONES ─────────────────────────────────────────────────────────────────
+function toggleProduct(prod, item) {
+  const selected = getSelected();
+  const isFixed = !Array.isArray(prod.precio);
+  if (selected[prod.titulo]) {
+    delete selected[prod.titulo];
+    item.classList.remove('selected');
+  } else {
+    if (isFixed) {
+      selected[prod.titulo] = { fixed: true, price: prod.precio };
+    } else {
+      const origPcts = (prod.porcentajes || []).filter(p => p !== '0%');
+      selected[prod.titulo] = { basePrice: null, pcts: [...origPcts] };
+    }
+    item.classList.add('selected');
+  }
+  document.getElementById('sumCount').textContent = totalSelected();
+  renderProducts(); updateJSON();
+}
+
+function onBasePrice(prod, base) {
+  const sel = getSelected()[prod.titulo]; if (!sel) return;
+  sel.basePrice = isNaN(base) ? null : base;
+  if (sel.pcts && sel.basePrice) {
+    sel.pcts.forEach(pct => {
+      const el = document.getElementById(`pp_${safeKey(prod.titulo)}_${pct.replace(/[^0-9]/g,'_')}`);
+      if (el) { el.textContent = `$${calcPrice(prod, pct, sel.basePrice).toLocaleString('es-AR')}`; el.classList.remove('pending'); }
+    });
+  }
+  updateJSON();
+}
+
+function addPct(prod, pct) {
+  const sel = getSelected()[prod.titulo]; if (!sel || sel.pcts.includes(pct)) return;
+  sel.pcts.push(pct);
+  sel.pcts.sort((a,b) => parseFloat(a) - parseFloat(b));
+  renderProducts(); updateJSON();
+}
+
+function removePct(prod, pct) {
+  const sel = getSelected()[prod.titulo]; if (!sel) return;
+  sel.pcts = sel.pcts.filter(p => p !== pct);
+  renderProducts(); updateJSON();
+}
+
+// ─── JSON ─────────────────────────────────────────────────────────────────────
+// Construye el JSON completo con todas las ciudades y categorías seleccionadas
+function buildJSON() {
+  const out = {};
+  let hasAny = false;
+
+  Object.entries(allSelected).forEach(([cityKey, cats]) => {
+    Object.entries(cats).forEach(([cat, selMap]) => {
+      const products = DATA[cityKey]?.[cat] || [];
+      const entries = [];
+
+      products.forEach(prod => {
+        const sel = selMap[prod.titulo]; if (!sel) return;
+        const isFixed = !Array.isArray(prod.precio);
+
+        if (isFixed) {
+          entries.push({ titulo: prod.titulo, precio: prod.precio || sel.price || 0 });
+          return;
+        }
+
+        const activePcts = ['0%', ...(sel.pcts || [])];
+        const base = sel.basePrice;
+
+        if (!base) {
+          entries.push({ titulo: prod.titulo, precio: null, porcentajes: activePcts });
+          return;
+        }
+
+        const precios = activePcts.map(pct => pct === '0%' ? base : calcPrice(prod, pct, base));
+        entries.push({ titulo: prod.titulo, precio: precios, porcentajes: activePcts });
+      });
+
+      if (entries.length > 0) {
+        if (!out[cityKey]) out[cityKey] = {};
+        out[cityKey][cat] = entries;
+        hasAny = true;
+      }
+    });
+  });
+
+  return hasAny ? out : null;
+}
+
+function syntaxHighlight(json) {
+  return JSON.stringify(json, null, 2)
+    .replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, m => {
+      if (/^"/.test(m)) {
+        if (/:$/.test(m)) return `<span class="json-key">${m}</span>`;
+        if (/\d+%|"\d+(ra|da|er)"/.test(m)) return `<span class="json-pct">${m}</span>`;
+        return `<span class="json-string">${m}</span>`;
+      }
+      return `<span class="json-number">${m}</span>`;
+    })
+    .replace(/[{}\[\]]/g, m => `<span class="json-bracket">${m}</span>`);
+}
+
+function updateJSON() {
+  const out  = document.getElementById('jsonOutput');
+  const json = buildJSON();
+  const n    = totalSelected();
+  document.getElementById('sumCount').textContent = n;
+  // update tab counts
+  document.getElementById('jsonTabCount').textContent = n;
+  document.getElementById('tableTabCount').textContent = n;
+  if (!json || n === 0) {
+    out.innerHTML = `<div class="empty-state"><div class="empty-icon">{ }</div><div>${!currentCity ? 'Seleccioná una ciudad y productos para comenzar' : 'Seleccioná al menos un producto'}</div></div>`;
+    if (currentView === 'table') renderTable();
+    return;
+  }
+  out.innerHTML = `<pre>${syntaxHighlight(json)}</pre>`;
+  if (currentView === 'table') renderTable();
+}
+
+function copyJSON() {
+  const json = buildJSON(); if (!json) return;
+  navigator.clipboard.writeText(JSON.stringify(json, null, 2)).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copiado!'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copiar JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+
+
+// ─── THEME ────────────────────────────────────────────────────────────────────
+function toggleTheme() {
+  const isLight = document.documentElement.classList.toggle('light');
+  const btn = document.getElementById('themeBtn');
+  btn.textContent = isLight ? '🌙 Modo oscuro' : '☀️ Modo claro';
+  try { sessionStorage.setItem('theme', isLight ? 'light' : 'dark'); } catch(e) {}
+}
+
+function loadTheme() {
+  try {
+    const t = sessionStorage.getItem('theme');
+    if (t === 'light') {
+      document.documentElement.classList.add('light');
+      document.getElementById('themeBtn').textContent = '🌙 Modo oscuro';
+    }
+  } catch(e) {}
+}
+
+// ─── VIEW SWITCHING ───────────────────────────────────────────────────────────
+let currentView = 'json';
+
+function switchView(view) {
+  currentView = view;
+  document.getElementById('jsonOutput').classList.toggle('active', view === 'json');
+  document.getElementById('tableOutput').classList.toggle('active', view === 'table');
+  document.getElementById('tabJSON').classList.toggle('active', view === 'json');
+  document.getElementById('tabTable').classList.toggle('active', view === 'table');
+  if (view === 'table') renderTable();
+}
+
+// ─── TABLE RENDER ─────────────────────────────────────────────────────────────
+function renderTable() {
+  const container = document.getElementById('tableOutput');
+  const json = buildJSON();
+  if (!json || totalSelected() === 0) {
+    container.innerHTML = '<div class="table-empty"><div class="empty-icon">⊞</div><div>Seleccioná productos para ver la tabla</div></div>';
+    return;
+  }
+
+  // Collect all unique porcentajes across everything selected
+  // Build rows: one row per product, columns = [Ciudad, Cat, Producto, precio@0%, precio@pct1, ...]
+  // Group by city+cat sections, each with its own header row showing the pcts
+
+  let html = '';
+
+  Object.entries(json).forEach(([cityKey, cats]) => {
+    const cityName = { listaSalvador:'Salvador', listaPalpala:'Palpalá', listaPerico:'Perico' }[cityKey] || cityKey;
+
+    Object.entries(cats).forEach(([cat, prods]) => {
+      if (!prods.length) return;
+
+      // Collect all unique pct labels for this section
+      // porcentajes arrays per product may differ — we need a union
+      const allPcts = new Set();
+      prods.forEach(p => {
+        if (Array.isArray(p.porcentajes)) p.porcentajes.forEach(pct => allPcts.add(pct));
+        else if (!Array.isArray(p.precio)) allPcts.add('fijo');
+      });
+      const pctCols = [...allPcts];
+
+      const catClass = cat === 'Cable' ? 'cable' : 'internet';
+
+      html += `<div class="table-section">`;
+      html += `<div class="table-section-title">
+        <span class="td-cat ${catClass}">${cat}</span>
+        ${cityName}
+      </div>`;
+      html += `<table class="price-table"><thead><tr>
+        <th>Producto</th>
+        ${pctCols.map(p => `<th class="pct-col">${p}</th>`).join('')}
+      </tr></thead><tbody>`;
+
+      prods.forEach(prod => {
+        const isFixed = !Array.isArray(prod.precio);
+        html += `<tr>`;
+        html += `<td class="td-name">${prod.titulo}</td>`;
+
+        if (isFixed) {
+          // single price, spans all cols
+          html += `<td class="td-price base" colspan="${pctCols.length}">$${Number(prod.precio).toLocaleString('es-AR')}</td>`;
+        } else {
+          // map each pct col to the price
+          const pctMap = {};
+          if (prod.porcentajes && prod.precio) {
+            prod.porcentajes.forEach((pct, i) => { pctMap[pct] = prod.precio[i]; });
+          }
+
+          pctCols.forEach((pct, ci) => {
+            const val = pctMap[pct];
+            if (val == null) {
+              html += `<td class="td-price empty">—</td>`;
+            } else {
+              const isBase = pct === '0%';
+              html += `<td class="td-price${isBase ? ' base' : ''}">$${Number(val).toLocaleString('es-AR')}</td>`;
+            }
+          });
+        }
+
+        html += `</tr>`;
+      });
+
+      html += `</tbody></table></div>`;
+    });
+  });
+
+  container.innerHTML = html;
+}
+
+init();
+</script>
+</body>
+</html>
