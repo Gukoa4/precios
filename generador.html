@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Constructor de Lista de Precios</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a40;
+    --accent: #6c63ff;
+    --accent2: #ff6584;
+    --accent3: #43e97b;
+    --text: #e8e8f0;
+    --muted: #6b6b8a;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 430px 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  header {
+    grid-column: 1 / -1;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--surface);
+  }
+  .logo { width: 36px; height: 36px; background: var(--accent); border-radius: 9px; display: grid; place-items: center; font-size: 18px; }
+  header h1 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.03em; }
+  header h1 span { color: var(--accent); }
+  .header-sub { margin-left: auto; font-family: var(--mono); font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  .panel-left {
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    padding: 12px 20px 8px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .city-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 7px;
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .city-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 9px 6px;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 0.73rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: center;
+  }
+  .city-btn:hover { border-color: var(--accent); color: var(--text); }
+  .city-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .cat-tabs { display: flex; border-bottom: 1px solid var(--border); }
+  .cat-tab {
+    flex: 1; padding: 11px; background: none; border: none;
+    border-bottom: 2px solid transparent; color: var(--muted);
+    font-family: var(--sans); font-size: 0.78rem; font-weight: 700;
+    cursor: pointer; transition: all 0.18s; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .cat-tab.active { color: var(--text); border-bottom-color: var(--accent); }
+
+  .products-list { flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+
+  .product-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .product-item.selected { border-color: var(--accent3); }
+
+  .product-header {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 13px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .product-check {
+    width: 17px; height: 17px;
+    border-radius: 5px;
+    border: 2px solid var(--border);
+    display: grid; place-items: center;
+    transition: all 0.18s; flex-shrink: 0;
+  }
+  .product-item.selected .product-check { background: var(--accent3); border-color: var(--accent3); }
+  .check-icon { font-size: 10px; opacity: 0; transition: opacity 0.18s; }
+  .product-item.selected .check-icon { opacity: 1; }
+
+  .product-name { font-size: 0.76rem; font-weight: 600; line-height: 1.3; flex: 1; }
+
+  .price-badge {
+    font-family: var(--mono); font-size: 0.67rem;
+    color: var(--accent); background: rgba(108,99,255,0.12);
+    padding: 3px 7px; border-radius: 4px; white-space: nowrap;
+  }
+
+  /* BODY */
+  .product-body { display: none; padding: 0 13px 12px; flex-direction: column; gap: 8px; }
+  .product-item.selected .product-body { display: flex; }
+
+  .base-row { display: flex; align-items: center; gap: 8px; }
+  .base-label { font-family: var(--mono); font-size: 0.63rem; color: var(--muted); width: 68px; flex-shrink: 0; }
+
+  .price-input {
+    flex: 1; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 9px; color: var(--text);
+    font-family: var(--mono); font-size: 0.73rem; outline: none; transition: border-color 0.18s;
+  }
+  .price-input:focus { border-color: var(--accent); }
+  .price-input.fixed-price { color: var(--muted); background: rgba(255,255,255,0.02); cursor: default; }
+
+  .pct-divider {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 0.57rem;
+    color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .pct-divider::before, .pct-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .pct-rows { display: flex; flex-direction: column; gap: 4px; }
+
+  .pct-row {
+    display: flex; align-items: center; gap: 7px;
+    background: rgba(0,0,0,0.25); border-radius: 6px; padding: 6px 9px;
+    border: 1px solid transparent; transition: border-color 0.15s;
+  }
+  .pct-row:hover { border-color: var(--border); }
+
+  .pct-row-label {
+    font-family: var(--mono); font-size: 0.65rem; color: var(--accent2);
+    width: 38px; flex-shrink: 0; text-align: right;
+  }
+  .pct-row-arrow { color: var(--border); font-size: 0.6rem; flex-shrink: 0; }
+  .pct-row-price {
+    flex: 1; font-family: var(--mono); font-size: 0.72rem; color: var(--accent3);
+  }
+  .pct-row-price.pending { color: var(--muted); }
+
+  .pct-row-del {
+    background: none; border: none; color: var(--muted);
+    cursor: pointer; font-size: 0.68rem; padding: 2px 4px;
+    opacity: 0.4; transition: all 0.15s; flex-shrink: 0; border-radius: 3px;
+  }
+  .pct-row-del:hover { color: var(--accent2); opacity: 1; background: rgba(255,101,132,0.1); }
+
+  .pct-empty {
+    font-family: var(--mono); font-size: 0.62rem; color: var(--muted);
+    padding: 4px 2px; font-style: italic;
+  }
+
+  .add-pct-area { display: flex; flex-direction: column; gap: 5px; }
+
+  .presets-row { display: flex; flex-wrap: wrap; gap: 4px; }
+  .pct-preset-btn {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 3px 8px; color: var(--muted);
+    font-family: var(--mono); font-size: 0.62rem; cursor: pointer; transition: all 0.15s;
+  }
+  .pct-preset-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .pct-preset-btn.used {
+    border-color: rgba(67,233,123,0.3); color: var(--accent3);
+    opacity: 0.55; cursor: default; pointer-events: none;
+  }
+
+  .custom-pct-row { display: flex; gap: 5px; align-items: center; }
+  .pct-custom-input {
+    width: 72px; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 5px; padding: 5px 8px; color: var(--text);
+    font-family: var(--mono); font-size: 0.7rem; outline: none; transition: border-color 0.18s;
+  }
+  .pct-custom-input:focus { border-color: var(--accent); }
+  .pct-add-btn {
+    background: rgba(108,99,255,0.18); border: 1px solid rgba(108,99,255,0.35);
+    border-radius: 5px; padding: 5px 11px; color: var(--accent);
+    font-family: var(--sans); font-size: 0.68rem; font-weight: 700;
+    cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  }
+  .pct-add-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* RIGHT PANEL */
+  .panel-right { display: flex; flex-direction: column; overflow: hidden; }
+
+  .output-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 22px; border-bottom: 1px solid var(--border); background: var(--surface);
+  }
+  .output-title {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 8px;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent3); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .copy-btn {
+    background: var(--accent); border: none; border-radius: 7px;
+    padding: 7px 16px; color: #fff; font-family: var(--sans); font-size: 0.75rem;
+    font-weight: 700; cursor: pointer; transition: all 0.18s;
+  }
+  .copy-btn:hover { background: #5a52d5; transform: translateY(-1px); }
+  .copy-btn.copied { background: var(--accent3); color: #000; }
+
+  .json-output { flex: 1; overflow-y: auto; padding: 22px; }
+  pre { font-family: var(--mono); font-size: 0.76rem; line-height: 1.75; white-space: pre-wrap; word-break: break-word; }
+
+  .json-key { color: #79b8ff; }
+  .json-string { color: #9ecbff; }
+  .json-number { color: var(--accent3); }
+  .json-pct { color: #f97583; }
+  .json-bracket { color: var(--muted); }
+
+  .empty-state {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; height: 100%; gap: 10px;
+    color: var(--muted); font-family: var(--mono); font-size: 0.78rem;
+  }
+  .empty-icon { font-size: 2.8rem; opacity: 0.2; }
+
+  .summary-bar {
+    display: flex; gap: 6px; padding: 9px 22px;
+    background: var(--surface); border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
+  }
+  .summary-bar span { color: var(--accent); }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">📋</div>
+  <h1>Constructor de <span>Lista de Precios</span></h1>
+  <div class="header-sub">Mar 2026 · v2.0</div>
+</header>
+
+<div class="panel-left">
+  <div class="section-label">📍 Ciudad</div>
+  <div class="city-grid" id="cityGrid"></div>
+  <div class="cat-tabs">
+    <button class="cat-tab active" data-cat="Cable" onclick="setCategory('Cable')">📺 Cable</button>
+    <button class="cat-tab" data-cat="Internet" onclick="setCategory('Internet')">🌐 Internet</button>
+  </div>
+  <div class="section-label" id="prodLabel">Seleccioná una ciudad</div>
+  <div class="products-list" id="productsList"></div>
+</div>
+
+<div class="panel-right">
+  <div class="output-header">
+    <div class="output-title"><div class="dot"></div>JSON Output · en vivo</div>
+    <button class="copy-btn" id="copyBtn" onclick="copyJSON()">📋 Copiar JSON</button>
+  </div>
+  <div class="json-output" id="jsonOutput">
+    <div class="empty-state"><div class="empty-icon">{ }</div><div>Seleccioná ciudad y productos para comenzar</div></div>
+  </div>
+  <div class="summary-bar">
+    Ciudad: <span id="sumCity">—</span>
+    &nbsp;·&nbsp; Categoría: <span id="sumCat">Cable</span>
+    &nbsp;·&nbsp; Productos seleccionados: <span id="sumCount">0</span>
+  </div>
+</div>
+
+<script>
+const DATA = {
+  listaSalvador: {
+    Cable: [
+      { titulo: "TV ui-666 ui-001", precio: [27070,18949,16242,13535,12182], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Go ui-416", precio: [4350,3698,3045,2958,2610,2175], porcentajes: ["0%","15%","30%","32%","40%","50%"] },
+      { titulo: "Go Adicional", precio: 2660 },
+      { titulo: "Futbol", precio: [22135,11068], porcentajes: ["0%","50%"] },
+      { titulo: "HBO", precio: [13230,6615], porcentajes: ["0%","50%"] },
+      { titulo: "Adultos", precio: 2200 },
+      { titulo: "REHABILITACION INTERNET/HD", precio: 5880 },
+      { titulo: "GASTOS ADMINISTRATIVOS", precio: 1880 },
+      { titulo: "Reconexion", precio: [7970,11390,13780], porcentajes: ["1ra","2da","3ra"] },
+    ],
+    Internet: [
+      { titulo: "Internet 50MB UI-728 UI-732", precio: [33370,23359,20022,16685,15017], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Internet 100MB ui-776", precio: [42590,29813,25554,21295,19166], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Internet 300MB", precio: [50110,35077,30066,25055,21547], porcentajes: ["0%","30%","40%","50%","57%"] },
+      { titulo: "Internet 600MB", precio: [69260,48482,41556,34630,31167], porcentajes: ["0%","30%","40%","50%","55%"] },
+    ],
+  },
+  listaPalpala: {
+    Cable: [
+      { titulo: "TV UI-580", precio: [17490,12243,10494,8745,7871], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Go UI-716", precio: [4270,3630,2989,2904,2562,2135], porcentajes: ["0%","15%","30%","32%","40%","50%"] },
+      { titulo: "Go Adicional", precio: 2145 },
+      { titulo: "Futbol", precio: [22135,11068], porcentajes: ["0%","50%"] },
+      { titulo: "HBO", precio: [13230,6615], porcentajes: ["0%","50%"] },
+      { titulo: "Adultos", precio: 2200 },
+      { titulo: "REHABILITACION INTERNET/HD", precio: 5880 },
+      { titulo: "GASTOS ADMINISTRATIVOS", precio: 1880 },
+      { titulo: "Reconexion", precio: [7970,11390,13780], porcentajes: ["1ra","2da","3ra"] },
+    ],
+    Internet: [
+      { titulo: "Internet 50MB", precio: [24370,17059,14622,12185,10967], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Internet 100MB (Venta) UI-1121", precio: [30800,21560,13860], porcentajes: ["0%","30%","55%"] },
+      { titulo: "Internet 300MB", precio: [50110,35077,30066,25055,21547], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Internet 600MB", precio: [69260,48482,41556,34630,31167], porcentajes: ["0%","30%","40%","50%","55%"] },
+      { titulo: "Internet 100MB UI-945", precio: [42590,29813,25554,21295,19166], porcentajes: ["0%","30%","40%","50%","55%"] },
+    ],
+  },
+  listaPerico: {
+    Cable: [
+      { titulo: "TV UI-1126", precio: [19000], porcentajes: ["0%"] },
+      { titulo: "4GO APP X3 (PERICO)", precio: 10000 },
+      { titulo: "Futbol", precio: 22135 },
+      { titulo: "HBO", precio: 13230 },
+      { titulo: "Adultos", precio: 2200 },
+      { titulo: "REHABILITACION INTERNET/HD", precio: 5040 },
+      { titulo: "GASTOS ADMINISTRATIVOS", precio: 1610 },
+      { titulo: "Reconexion", precio: [6830,9770,11820], porcentajes: ["1ra","2da","3ra"] },
+    ],
+    Internet: [
+      { titulo: "Internet 100MB UI-994", precio: [25830], porcentajes: ["0%"] },
+      { titulo: "Internet 300MB", precio: [28830], porcentajes: ["0%"] },
+      { titulo: "Internet 600MB", precio: [31830], porcentajes: ["0%"] },
+    ],
+  },
+};
+
+const CITY_MAP = { listaSalvador: 'Salvador', listaPalpala: 'Palpalá', listaPerico: 'Perico' };
+const PCT_PRESETS = ['15%','30%','32%','40%','45%','50%','55%','57%','60%'];
+
+let currentCity = null;
+let currentCat  = 'Cable';
+
+// selected[titulo] = {
+//   fixed: bool,
+//   price: number,           // si fixed
+//   basePrice: number|null,  // si !fixed
+//   pcts: string[],          // porcentajes activos SIN "0%" (ej: ["30%","50%"])
+// }
+let selected = {};
+
+// ── utils ──────────────────────────────────────────────────────────────────
+function normalizePct(str) {
+  const s = str.trim().replace('%','');
+  const n = parseFloat(s);
+  if (isNaN(n) || n <= 0 || n >= 100) return null;
+  return Number.isInteger(n) ? `${n}%` : `${n}%`;
+}
+
+function safeKey(t) { return t.replace(/[^a-zA-Z0-9]/g,'_'); }
+
+// Devuelve el factor de descuento para un pct dado un producto original.
+// Si el pct existía en el producto original, usa el ratio exacto.
+// Si no, aplica el porcentaje directo.
+function getFactor(prod, pct) {
+  if (!Array.isArray(prod.precio)) return 1;
+  const idx = (prod.porcentajes || []).indexOf(pct);
+  if (idx !== -1) return prod.precio[idx] / prod.precio[0];
+  const n = parseFloat(pct) / 100;
+  return 1 - n;
+}
+
+function calcPrice(prod, pct, base) {
+  return Math.round(base * getFactor(prod, pct));
+}
+
+// ── init ───────────────────────────────────────────────────────────────────
+function init() {
+  const grid = document.getElementById('cityGrid');
+  Object.entries(CITY_MAP).forEach(([key, name]) => {
+    const btn = document.createElement('button');
+    btn.className = 'city-btn'; btn.textContent = name; btn.dataset.key = key;
+    btn.onclick = () => setCity(key);
+    grid.appendChild(btn);
+  });
+}
+
+function setCity(key) {
+  currentCity = key; selected = {};
+  document.querySelectorAll('.city-btn').forEach(b => b.classList.toggle('active', b.dataset.key === key));
+  document.getElementById('sumCity').textContent = CITY_MAP[key];
+  renderProducts(); updateJSON();
+}
+
+function setCategory(cat) {
+  currentCat = cat; selected = {};
+  document.querySelectorAll('.cat-tab').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+  document.getElementById('sumCat').textContent = cat;
+  renderProducts(); updateJSON();
+}
+
+// ── render ─────────────────────────────────────────────────────────────────
+function renderProducts() {
+  const list = document.getElementById('productsList');
+  list.innerHTML = '';
+  if (!currentCity) return;
+
+  const products = DATA[currentCity][currentCat] || [];
+  document.getElementById('prodLabel').textContent = `Productos · ${CITY_MAP[currentCity]} · ${currentCat}`;
+
+  products.forEach(prod => {
+    const isFixed    = !Array.isArray(prod.precio);
+    const isSelected = !!selected[prod.titulo];
+    const sel        = selected[prod.titulo];
+
+    const item = document.createElement('div');
+    item.className = 'product-item' + (isSelected ? ' selected' : '');
+
+    // header
+    const header = document.createElement('div');
+    header.className = 'product-header';
+    header.onclick = () => toggleProduct(prod, item);
+
+    const chk = document.createElement('div');
+    chk.className = 'product-check';
+    chk.innerHTML = '<span class="check-icon">✓</span>';
+
+    const nm = document.createElement('div');
+    nm.className = 'product-name'; nm.textContent = prod.titulo;
+
+    const badge = document.createElement('div');
+    badge.className = 'price-badge';
+    if (isFixed) {
+      badge.textContent = `$${prod.precio.toLocaleString('es-AR')}`;
+    } else if (isSelected) {
+      const total = 1 + (sel.pcts?.length || 0);
+      badge.textContent = `${total} precio${total !== 1 ? 's' : ''}`;
+    } else {
+      badge.textContent = `${prod.precio.length} precios orig.`;
+    }
+
+    header.append(chk, nm, badge);
+    item.appendChild(header);
+
+    // body
+    const body = document.createElement('div');
+    body.className = 'product-body';
+
+    if (isFixed) {
+      const row = document.createElement('div'); row.className = 'base-row';
+      const lbl = document.createElement('div'); lbl.className = 'base-label'; lbl.textContent = 'Fijo';
+      const inp = document.createElement('input');
+      inp.className = 'price-input fixed-price'; inp.readOnly = true;
+      inp.value = `$${prod.precio.toLocaleString('es-AR')}`;
+      row.append(lbl, inp); body.appendChild(row);
+
+    } else {
+      // precio base
+      const baseRow = document.createElement('div'); baseRow.className = 'base-row';
+      const baseLbl = document.createElement('div'); baseLbl.className = 'base-label'; baseLbl.textContent = '0% · base';
+      const baseInp = document.createElement('input');
+      baseInp.className = 'price-input'; baseInp.type = 'number'; baseInp.placeholder = 'Precio base';
+      if (sel?.basePrice) baseInp.value = sel.basePrice;
+      baseInp.addEventListener('input', () => onBasePrice(prod, parseFloat(baseInp.value)));
+      baseRow.append(baseLbl, baseInp);
+      body.appendChild(baseRow);
+
+      // divider
+      const div = document.createElement('div'); div.className = 'pct-divider'; div.textContent = 'descuentos';
+      body.appendChild(div);
+
+      // filas de porcentajes activos
+      const pctRows = document.createElement('div');
+      pctRows.className = 'pct-rows';
+      buildPctRows(prod, pctRows, sel);
+      body.appendChild(pctRows);
+
+      // zona agregar
+      const addArea = document.createElement('div'); addArea.className = 'add-pct-area';
+
+      const presetsRow = document.createElement('div'); presetsRow.className = 'presets-row';
+      buildPresets(prod, presetsRow, sel);
+      addArea.appendChild(presetsRow);
+
+      const customRow = document.createElement('div'); customRow.className = 'custom-pct-row';
+      const cInp = document.createElement('input');
+      cInp.className = 'pct-custom-input'; cInp.type = 'text'; cInp.placeholder = 'ej: 45%';
+      const addBtn = document.createElement('button');
+      addBtn.className = 'pct-add-btn'; addBtn.textContent = '+ Agregar %';
+      const doAdd = () => {
+        const val = normalizePct(cInp.value);
+        if (!val) { cInp.style.borderColor='var(--accent2)'; setTimeout(()=>cInp.style.borderColor='',700); return; }
+        addPct(prod, val); cInp.value = '';
+      };
+      addBtn.onclick = doAdd;
+      cInp.addEventListener('keydown', e => { if(e.key==='Enter') doAdd(); });
+      customRow.append(cInp, addBtn);
+      addArea.appendChild(customRow);
+      body.appendChild(addArea);
+    }
+
+    item.appendChild(body);
+    list.appendChild(item);
+  });
+}
+
+function buildPctRows(prod, container, sel) {
+  container.innerHTML = '';
+  if (!sel || !sel.pcts || sel.pcts.length === 0) {
+    const empty = document.createElement('div'); empty.className = 'pct-empty';
+    empty.textContent = 'Sin descuentos — solo precio base';
+    container.appendChild(empty); return;
+  }
+  sel.pcts.forEach(pct => {
+    const row = document.createElement('div'); row.className = 'pct-row';
+
+    const lbl = document.createElement('div'); lbl.className = 'pct-row-label'; lbl.textContent = pct;
+    const arr = document.createElement('div'); arr.className = 'pct-row-arrow'; arr.textContent = '→';
+
+    const priceEl = document.createElement('div');
+    priceEl.className = 'pct-row-price' + (sel.basePrice ? '' : ' pending');
+    priceEl.id = `pp_${safeKey(prod.titulo)}_${pct.replace('%','p').replace(/\D/g,'_')}`;
+    priceEl.textContent = sel.basePrice
+      ? `$${calcPrice(prod, pct, sel.basePrice).toLocaleString('es-AR')}`
+      : '— ingresá precio base';
+
+    const del = document.createElement('button'); del.className = 'pct-row-del';
+    del.textContent = '✕'; del.title = `Quitar ${pct}`;
+    del.onclick = e => { e.stopPropagation(); removePct(prod, pct); };
+
+    row.append(lbl, arr, priceEl, del);
+    container.appendChild(row);
+  });
+}
+
+function buildPresets(prod, container, sel) {
+  container.innerHTML = '';
+  PCT_PRESETS.forEach(p => {
+    const btn = document.createElement('button');
+    const used = sel?.pcts?.includes(p);
+    btn.className = 'pct-preset-btn' + (used ? ' used' : '');
+    btn.textContent = p;
+    if (!used) btn.onclick = () => addPct(prod, p);
+    container.appendChild(btn);
+  });
+}
+
+// ── acciones ───────────────────────────────────────────────────────────────
+function toggleProduct(prod, item) {
+  const isFixed = !Array.isArray(prod.precio);
+  if (selected[prod.titulo]) {
+    delete selected[prod.titulo];
+    item.classList.remove('selected');
+  } else {
+    if (isFixed) {
+      selected[prod.titulo] = { fixed: true, price: prod.precio };
+    } else {
+      // Inicializar con los porcentajes originales del producto (sin "0%")
+      const origPcts = (prod.porcentajes || []).filter(p => p !== '0%');
+      selected[prod.titulo] = { basePrice: null, pcts: [...origPcts] };
+    }
+    item.classList.add('selected');
+  }
+  document.getElementById('sumCount').textContent = Object.keys(selected).length;
+  renderProducts(); updateJSON();
+}
+
+function onBasePrice(prod, base) {
+  const sel = selected[prod.titulo]; if (!sel) return;
+  sel.basePrice = isNaN(base) ? null : base;
+  // actualizar precios ya renderizados sin re-render completo
+  if (sel.pcts && sel.basePrice) {
+    sel.pcts.forEach(pct => {
+      const id = `pp_${safeKey(prod.titulo)}_${pct.replace('%','p').replace(/\D/g,'_')}`;
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = `$${calcPrice(prod, pct, sel.basePrice).toLocaleString('es-AR')}`;
+        el.classList.remove('pending');
+      }
+    });
+  }
+  updateJSON();
+}
+
+function addPct(prod, pct) {
+  const sel = selected[prod.titulo]; if (!sel || sel.pcts.includes(pct)) return;
+  sel.pcts.push(pct);
+  sel.pcts.sort((a,b) => parseFloat(a) - parseFloat(b));
+  renderProducts(); updateJSON();
+}
+
+function removePct(prod, pct) {
+  const sel = selected[prod.titulo]; if (!sel) return;
+  sel.pcts = sel.pcts.filter(p => p !== pct);
+  renderProducts(); updateJSON();
+}
+
+// ── json ───────────────────────────────────────────────────────────────────
+function buildJSON() {
+  if (!currentCity) return null;
+  const products = DATA[currentCity][currentCat] || [];
+  const out = { [currentCity]: { [currentCat]: [] } };
+
+  products.forEach(prod => {
+    const sel = selected[prod.titulo]; if (!sel) return;
+
+    if (sel.fixed) {
+      out[currentCity][currentCat].push({ titulo: prod.titulo, precio: sel.price });
+      return;
+    }
+
+    const activePcts = ['0%', ...(sel.pcts || [])];
+    const base = sel.basePrice;
+
+    if (!base) {
+      out[currentCity][currentCat].push({ titulo: prod.titulo, precio: null, porcentajes: activePcts });
+      return;
+    }
+
+    const precios = activePcts.map(pct => pct === '0%' ? base : calcPrice(prod, pct, base));
+    const entry = { titulo: prod.titulo, precio: precios };
+    if (activePcts.length > 0) entry.porcentajes = activePcts;
+    out[currentCity][currentCat].push(entry);
+  });
+
+  return out;
+}
+
+function syntaxHighlight(json) {
+  return JSON.stringify(json, null, 2)
+    .replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, m => {
+      if (/^"/.test(m)) {
+        if (/:$/.test(m)) return `<span class="json-key">${m}</span>`;
+        if (/\d+%|^\"\d+(ra|da|er)\"/.test(m)) return `<span class="json-pct">${m}</span>`;
+        return `<span class="json-string">${m}</span>`;
+      }
+      return `<span class="json-number">${m}</span>`;
+    })
+    .replace(/[{}\[\]]/g, m => `<span class="json-bracket">${m}</span>`);
+}
+
+function updateJSON() {
+  const out  = document.getElementById('jsonOutput');
+  const json = buildJSON();
+  const count = json?.[currentCity]?.[currentCat]?.length || 0;
+  if (!json || !currentCity || count === 0) {
+    out.innerHTML = `<div class="empty-state"><div class="empty-icon">{ }</div><div>${!currentCity ? 'Seleccioná una ciudad y productos para comenzar' : 'Seleccioná al menos un producto'}</div></div>`;
+    return;
+  }
+  out.innerHTML = `<pre>${syntaxHighlight(json)}</pre>`;
+  document.getElementById('sumCount').textContent = count;
+}
+
+function copyJSON() {
+  const json = buildJSON(); if (!json) return;
+  navigator.clipboard.writeText(JSON.stringify(json, null, 2)).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copiado!'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copiar JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+init();
+</script>
+</body>
+</html>
