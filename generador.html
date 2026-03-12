@@ -329,7 +329,7 @@
   <div class="summary-bar">
     Ciudad: <span id="sumCity">—</span>
     &nbsp;·&nbsp; Cat: <span id="sumCat">Cable</span>
-    &nbsp;·&nbsp; Seleccionados: <span id="sumCount">0</span>
+    &nbsp;·&nbsp; Total seleccionados: <span id="sumCount">0</span>
   </div>
 </div>
 
@@ -399,12 +399,28 @@ const PCT_PRESETS = ['15%','30%','32%','40%','45%','50%','55%','57%','60%'];
 const SESSION_KEY = 'lista_precios_data';
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
-// DATA es el estado editable (puede diferir de BASE_DATA)
 let DATA = {};
 let currentCity = null;
 let currentCat  = 'Cable';
-let selected    = {}; // { [titulo]: { fixed, price, basePrice, pcts } }
-let editingName = null; // titulo actual en edición
+let editingName = null;
+
+// allSelected[cityKey][cat][titulo] = { fixed, price, basePrice, pcts }
+let allSelected = {};
+
+function getSelected() {
+  if (!currentCity) return {};
+  if (!allSelected[currentCity]) allSelected[currentCity] = {};
+  if (!allSelected[currentCity][currentCat]) allSelected[currentCity][currentCat] = {};
+  return allSelected[currentCity][currentCat];
+}
+
+function totalSelected() {
+  let n = 0;
+  Object.values(allSelected).forEach(city =>
+    Object.values(city).forEach(cat => { n += Object.keys(cat).length; })
+  );
+  return n;
+}
 
 // ─── SESSION STORAGE ──────────────────────────────────────────────────────────
 function loadSession() {
@@ -431,7 +447,7 @@ function resetData() {
   if (!confirm('¿Restablecer todos los productos a los valores originales? Esto borrará tus cambios de esta sesión.')) return;
   sessionStorage.removeItem(SESSION_KEY);
   DATA = JSON.parse(JSON.stringify(BASE_DATA));
-  selected = {};
+  allSelected = {};
   markSaved(false);
   renderProducts();
   updateJSON();
@@ -490,7 +506,7 @@ function init() {
 }
 
 function setCity(key) {
-  currentCity = key; selected = {}; editingName = null;
+  currentCity = key; editingName = null;
   document.querySelectorAll('.city-btn').forEach(b => b.classList.toggle('active', b.dataset.key === key));
   document.getElementById('sumCity').textContent = CITY_MAP[key];
   document.getElementById('addProductBar').classList.add('visible');
@@ -498,7 +514,7 @@ function setCity(key) {
 }
 
 function setCategory(cat) {
-  currentCat = cat; selected = {}; editingName = null;
+  currentCat = cat; editingName = null;
   document.querySelectorAll('.cat-tab').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
   document.getElementById('sumCat').textContent = cat;
   renderProducts(); updateJSON();
@@ -529,7 +545,7 @@ function addProduct() {
 function deleteProduct(titulo) {
   if (!currentCity) return;
   DATA[currentCity][currentCat] = DATA[currentCity][currentCat].filter(p => p.titulo !== titulo);
-  delete selected[titulo];
+  delete getSelected()[titulo];
   if (editingName === titulo) editingName = null;
   saveSession();
   renderProducts();
@@ -563,9 +579,10 @@ function commitEditName(titulo) {
     const oldTitle = prod.titulo;
     prod.titulo = uniqueTitle(currentCity, currentCat, newName);
     // Actualizar selected si estaba
-    if (selected[oldTitle]) {
-      selected[prod.titulo] = selected[oldTitle];
-      delete selected[oldTitle];
+    const sel_ = getSelected();
+    if (sel_[oldTitle]) {
+      sel_[prod.titulo] = sel_[oldTitle];
+      delete sel_[oldTitle];
     }
   }
   editingName = null;
@@ -585,6 +602,7 @@ function renderProducts() {
 
   products.forEach(prod => {
     const isFixed    = !Array.isArray(prod.precio);
+    const selected   = getSelected();
     const isSelected = !!selected[prod.titulo];
     const isEditing  = editingName === prod.titulo;
     const sel        = selected[prod.titulo];
@@ -764,6 +782,7 @@ function buildPresets(prod, container, sel) {
 
 // ─── ACCIONES ─────────────────────────────────────────────────────────────────
 function toggleProduct(prod, item) {
+  const selected = getSelected();
   const isFixed = !Array.isArray(prod.precio);
   if (selected[prod.titulo]) {
     delete selected[prod.titulo];
@@ -777,12 +796,12 @@ function toggleProduct(prod, item) {
     }
     item.classList.add('selected');
   }
-  document.getElementById('sumCount').textContent = Object.keys(selected).length;
+  document.getElementById('sumCount').textContent = totalSelected();
   renderProducts(); updateJSON();
 }
 
 function onBasePrice(prod, base) {
-  const sel = selected[prod.titulo]; if (!sel) return;
+  const sel = getSelected()[prod.titulo]; if (!sel) return;
   sel.basePrice = isNaN(base) ? null : base;
   if (sel.pcts && sel.basePrice) {
     sel.pcts.forEach(pct => {
@@ -794,47 +813,59 @@ function onBasePrice(prod, base) {
 }
 
 function addPct(prod, pct) {
-  const sel = selected[prod.titulo]; if (!sel || sel.pcts.includes(pct)) return;
+  const sel = getSelected()[prod.titulo]; if (!sel || sel.pcts.includes(pct)) return;
   sel.pcts.push(pct);
   sel.pcts.sort((a,b) => parseFloat(a) - parseFloat(b));
   renderProducts(); updateJSON();
 }
 
 function removePct(prod, pct) {
-  const sel = selected[prod.titulo]; if (!sel) return;
+  const sel = getSelected()[prod.titulo]; if (!sel) return;
   sel.pcts = sel.pcts.filter(p => p !== pct);
   renderProducts(); updateJSON();
 }
 
 // ─── JSON ─────────────────────────────────────────────────────────────────────
+// Construye el JSON completo con todas las ciudades y categorías seleccionadas
 function buildJSON() {
-  if (!currentCity) return null;
-  const products = DATA[currentCity][currentCat] || [];
-  const out = { [currentCity]: { [currentCat]: [] } };
+  const out = {};
+  let hasAny = false;
 
-  products.forEach(prod => {
-    const sel = selected[prod.titulo]; if (!sel) return;
-    const isFixed = !Array.isArray(prod.precio);
+  Object.entries(allSelected).forEach(([cityKey, cats]) => {
+    Object.entries(cats).forEach(([cat, selMap]) => {
+      const products = DATA[cityKey]?.[cat] || [];
+      const entries = [];
 
-    if (isFixed) {
-      out[currentCity][currentCat].push({ titulo: prod.titulo, precio: prod.precio || sel.price || 0 });
-      return;
-    }
+      products.forEach(prod => {
+        const sel = selMap[prod.titulo]; if (!sel) return;
+        const isFixed = !Array.isArray(prod.precio);
 
-    const activePcts = ['0%', ...(sel.pcts || [])];
-    const base = sel.basePrice;
+        if (isFixed) {
+          entries.push({ titulo: prod.titulo, precio: prod.precio || sel.price || 0 });
+          return;
+        }
 
-    if (!base) {
-      out[currentCity][currentCat].push({ titulo: prod.titulo, precio: null, porcentajes: activePcts });
-      return;
-    }
+        const activePcts = ['0%', ...(sel.pcts || [])];
+        const base = sel.basePrice;
 
-    const precios = activePcts.map(pct => pct === '0%' ? base : calcPrice(prod, pct, base));
-    const entry = { titulo: prod.titulo, precio: precios, porcentajes: activePcts };
-    out[currentCity][currentCat].push(entry);
+        if (!base) {
+          entries.push({ titulo: prod.titulo, precio: null, porcentajes: activePcts });
+          return;
+        }
+
+        const precios = activePcts.map(pct => pct === '0%' ? base : calcPrice(prod, pct, base));
+        entries.push({ titulo: prod.titulo, precio: precios, porcentajes: activePcts });
+      });
+
+      if (entries.length > 0) {
+        if (!out[cityKey]) out[cityKey] = {};
+        out[cityKey][cat] = entries;
+        hasAny = true;
+      }
+    });
   });
 
-  return out;
+  return hasAny ? out : null;
 }
 
 function syntaxHighlight(json) {
@@ -851,15 +882,15 @@ function syntaxHighlight(json) {
 }
 
 function updateJSON() {
-  const out   = document.getElementById('jsonOutput');
-  const json  = buildJSON();
-  const count = json?.[currentCity]?.[currentCat]?.length || 0;
-  if (!json || !currentCity || count === 0) {
+  const out  = document.getElementById('jsonOutput');
+  const json = buildJSON();
+  const n    = totalSelected();
+  document.getElementById('sumCount').textContent = n;
+  if (!json || n === 0) {
     out.innerHTML = `<div class="empty-state"><div class="empty-icon">{ }</div><div>${!currentCity ? 'Seleccioná una ciudad y productos para comenzar' : 'Seleccioná al menos un producto'}</div></div>`;
     return;
   }
   out.innerHTML = `<pre>${syntaxHighlight(json)}</pre>`;
-  document.getElementById('sumCount').textContent = count;
 }
 
 function copyJSON() {
