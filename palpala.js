@@ -1,6 +1,394 @@
 /*********************************
  * Marzo 2026** 
  **********************************/
+
+const listaJun2026 = {
+    {
+  "listaSalvador": {
+    "Cable": [
+      {
+        "titulo": "TV UI-666 UI-001",
+        "precio": [
+          29000,
+          20300,
+          17400,
+          14500,
+          13051
+        ],
+        "porcentajes": [
+          "0%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Go UI-416",
+        "precio": [
+          4600,
+          3911,
+          3220,
+          3128,
+          2760,
+          2300
+        ],
+        "porcentajes": [
+          "0%",
+          "15%",
+          "30%",
+          "32%",
+          "40%",
+          "50%"
+        ]
+      },
+      {
+        "titulo": "Go Adicional",
+        "precio": 2820
+      },
+      {
+        "titulo": "Fútbol",
+        "precio": [
+          23940,
+          11971
+        ],
+        "porcentajes": [
+          "0%",
+          "50%"
+        ]
+      },
+      {
+        "titulo": "HBO",
+        "precio": [
+          13230,
+          6615
+        ],
+        "porcentajes": [
+          "0%",
+          "50%"
+        ]
+      },
+      {
+        "titulo": "Adultos",
+        "precio": 2300
+      },
+      {
+        "titulo": "Rehabilitación Internet/HD",
+        "precio": 6300
+      },
+      {
+        "titulo": "Gastos Administrativos",
+        "precio": 1990
+      },
+      {
+        "titulo": "1ra Reconexión",
+        "precio": 8500
+      },
+      {
+        "titulo": "2da Reconexión",
+        "precio": 12100
+      },
+      {
+        "titulo": "3ra Reconexión",
+        "precio": 14600
+      }
+    ],
+    "Internet": [
+      {
+        "titulo": "Internet 50MB UI-728 UI-732",
+        "precio": [
+          35400,
+          24780,
+          21240,
+          17700,
+          15931
+        ],
+        "porcentajes": [
+          "0%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Internet 100MB UI-776",
+        "precio": [
+          45000,
+          31500,
+          27000,
+          22500,
+          20251
+        ],
+        "porcentajes": [
+          "0%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Internet 300MB",
+        "precio": [
+          53000,
+          37100,
+          31800,
+          26500,
+          22790
+        ],
+        "porcentajes": [
+          "0%",
+          "30%",
+          "40%",
+          "50%",
+          "57%"
+        ]
+      },
+      {
+        "titulo": "Internet 600MB",
+        "precio": [
+          73000,
+          51100,
+          43800,
+          36500,
+          32850
+        ],
+        "porcentajes": [
+          "0%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      }
+    ]
+  },
+  "listaPalpala": {
+    "Internet": [
+      {
+        "titulo": "Internet 50MB",
+        "precio": [
+          25800,
+          18060,
+          15480,
+          12900,
+          11611
+        ],
+        "porcentajes": [
+          "0%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Internet 100MB (Venta) UI-1121",
+        "precio": [
+          32700,
+          22890,
+          14715
+        ],
+        "porcentajes": [
+          "0%",
+          "30%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Internet 300MB",
+        "precio": [
+          53000,
+          37100,
+          31800,
+          26500,
+          22790
+        ],
+        "porcentajes": [
+          "0%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Internet 600MB",
+        "precio": [
+          73000,
+          51100,
+          43800,
+          36500,
+          32850
+        ],
+        "porcentajes": [
+          "0%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Internet 100MB UI-945",
+        "precio": [
+          45000,
+          31500,
+          27000,
+          22500,
+          20251
+        ],
+        "porcentajes": [
+          "0%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      }
+    ],
+    "Cable": [
+      {
+        "titulo": "TV UI-580",
+        "precio": [
+          18000,
+          12600,
+          10800,
+          9000,
+          8101
+        ],
+        "porcentajes": [
+          "0%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Go UI-716",
+        "precio": [
+          4600,
+          3911,
+          3220,
+          3128,
+          2760,
+          2300
+        ],
+        "porcentajes": [
+          "0%",
+          "15%",
+          "30%",
+          "32%",
+          "40%",
+          "50%"
+        ]
+      },
+      {
+        "titulo": "Go Adicional",
+        "precio": 2280
+      },
+      {
+        "titulo": "Fútbol",
+        "precio": [
+          23940,
+          11971
+        ],
+        "porcentajes": [
+          "0%",
+          "50%"
+        ]
+      },
+      {
+        "titulo": "HBO",
+        "precio": [
+          13230,
+          6615
+        ],
+        "porcentajes": [
+          "0%",
+          "50%"
+        ]
+      },
+      {
+        "titulo": "Adultos",
+        "precio": 2300
+      },
+      {
+        "titulo": "Rehabilitación Internet/HD",
+        "precio": 6300
+      },
+      {
+        "titulo": "Gastos Administrativos",
+        "precio": 1990
+      },
+      {
+        "titulo": "1ra Reconexión",
+        "precio": 8500
+      },
+      {
+        "titulo": "2da Reconexión",
+        "precio": 12100
+      },
+      {
+        "titulo": "3ra Reconexión",
+        "precio": 14600
+      }
+    ]
+  },
+  "listaPerico": {
+    "Cable": [
+      {
+        "titulo": "TV UI-1126",
+        "precio": [
+          19000
+        ],
+        "porcentajes": [
+          "0%"
+        ]
+      },
+      {
+        "titulo": "4GO App X3 (PERICO)",
+        "precio": 10000
+      },
+      {
+        "titulo": "Fútbol",
+        "precio": 23940
+      },
+      {
+        "titulo": "HBO",
+        "precio": 13230
+      },
+      {
+        "titulo": "Adultos",
+        "precio": 2200
+      },
+      {
+        "titulo": "Rehabilitación Internet/HD",
+        "precio": 5040
+      },
+      {
+        "titulo": "Gastos Administrativos",
+        "precio": 1610
+      },
+      {
+        "titulo": "1ra Reconexión",
+        "precio": 6830
+      },
+      {
+        "titulo": "2da Reconexión",
+        "precio": 9770
+      },
+      {
+        "titulo": "3ra Reconexión",
+        "precio": 11820
+      }
+    ]
+  }
+}
+}
+
 const listaMar2026 = {
     listaSalvador: {
         
@@ -3103,6 +3491,7 @@ let localidad = document.querySelector("#localidad");
 let listaMes = document.querySelector("#lista");
 
 let obListas = {
+    listaJun2026,
     listaMar2026,
     listaDic2025,
     listaNov2025,
