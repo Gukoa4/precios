@@ -3,7 +3,7 @@
  **********************************/
 
 const listaJun2026 = {
-    {
+    
   "listaSalvador": {
     "Cable": [
       {
@@ -386,7 +386,7 @@ const listaJun2026 = {
       }
     ]
   }
-}
+
 }
 
 const listaMar2026 = {
