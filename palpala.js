@@ -1,5 +1,5 @@
 /*********************************
- * Marzo 2026** 
+ * Junio 2026** 
  **********************************/
 
 const listaJun2026 = {
@@ -49,8 +49,8 @@ const listaJun2026 = {
       {
         "titulo": "Fútbol",
         "precio": [
-          23940,
-          11971
+       26340,
+          13170
         ],
         "porcentajes": [
           "0%",
@@ -292,8 +292,8 @@ const listaJun2026 = {
       {
         "titulo": "Fútbol",
         "precio": [
-          23940,
-          11971
+          26340,
+          13170
         ],
         "porcentajes": [
           "0%",
@@ -354,7 +354,7 @@ const listaJun2026 = {
       },
       {
         "titulo": "Fútbol",
-        "precio": 23940
+        "precio": 26340
       },
       {
         "titulo": "HBO",
@@ -388,6 +388,9 @@ const listaJun2026 = {
   }
 
 }
+/*********************************
+ * Marzo 2026** 
+ **********************************/
 
 const listaMar2026 = {
     listaSalvador: {
