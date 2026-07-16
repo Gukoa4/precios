@@ -49,8 +49,8 @@ const listaJun2026 = {
       {
         "titulo": "Fútbol",
         "precio": [
-       26340,
-          13170
+       26990,
+          13495
         ],
         "porcentajes": [
           "0%",
@@ -292,8 +292,8 @@ const listaJun2026 = {
       {
         "titulo": "Fútbol",
         "precio": [
-          26340,
-          13170
+       26990,
+          13495
         ],
         "porcentajes": [
           "0%",
@@ -354,7 +354,7 @@ const listaJun2026 = {
       },
       {
         "titulo": "Fútbol",
-        "precio": 26340
+        "precio":       26990
       },
       {
         "titulo": "HBO",
