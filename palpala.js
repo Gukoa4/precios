@@ -1,4 +1,450 @@
 /*********************************
+ * Octubre 2026
+ **********************************/
+
+const listaOct2026 = {
+  "listaSalvador": {
+    "Cable": [
+      {
+        "titulo": "TV UI-666 UI-001",
+        "precio": [
+          30900,
+          24720,
+          21630,
+          18540,
+          15450,
+          13905
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Go UI-416",
+        "precio": [
+          5000,
+          4250,
+          4000,
+          3500,
+          3400,
+          3000,
+          2500
+        ],
+        "porcentajes": [
+          "0%",
+          "15%",
+          "20%",
+          "30%",
+          "32%",
+          "40%",
+          "50%"
+        ]
+      },
+      {
+        "titulo": "Go Adicional",
+        "precio": 3050
+      },
+      {
+        "titulo": "Fútbol",
+        "precio": [
+          27660,
+          22128,
+          13830
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "50%"
+        ]
+      },
+      {
+        "titulo": "HBO",
+        "precio": [
+          13230,
+          10584,
+          6615
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "50%"
+        ]
+      },
+      {
+        "titulo": "Adultos",
+        "precio": 5000
+      },
+      {
+        "titulo": "Rehabilitación Internet/HD",
+        "precio": 6800
+      },
+      {
+        "titulo": "Gastos Administrativos",
+        "precio": 2150
+      },
+      {
+        "titulo": "1ra Reconexión",
+        "precio": 9180
+      },
+      {
+        "titulo": "2da Reconexión",
+        "precio": 13070
+      },
+      {
+        "titulo": "3ra Reconexión",
+        "precio": 15800
+      }
+    ],
+    "Internet": [
+      {
+        "titulo": "Internet 50MB UI-728 UI-732",
+        "precio": [
+          38300,
+          30640,
+          26810,
+          22980,
+          19150,
+          17235
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Internet 100MB UI-776",
+        "precio": [
+          48600,
+          38880,
+          34020,
+          29160,
+          24300,
+          21870
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Internet 300MB",
+        "precio": [
+          57240,
+          45792,
+          40068,
+          34344,
+          28620,
+          24613
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "30%",
+          "40%",
+          "50%",
+          "57%"
+        ]
+      },
+      {
+        "titulo": "Internet 600MB",
+        "precio": [
+          78840,
+          63072,
+          55188,
+          47304,
+          39420,
+          35478
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      }
+    ]
+  },
+  "listaPalpala": {
+    "Internet": [
+      {
+        "titulo": "Internet 50MB",
+        "precio": [
+          27860,
+          22288,
+          19502,
+          16716,
+          13930,
+          12537
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Internet 100MB (Venta) UI-1121",
+        "precio": [
+          35300,
+          28240,
+          24710,
+          15885
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "30%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Internet 300MB",
+        "precio": [
+          57240,
+          45792,
+          40068,
+          34344,
+          28620,
+          25758
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Internet 600MB",
+        "precio": [
+          78840,
+          63072,
+          55188,
+          47304,
+          39420,
+          35478
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Internet 100MB UI-945",
+        "precio": [
+          48600,
+          38880,
+          34020,
+          29160,
+          24300,
+          21870
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      }
+    ],
+    "Cable": [
+      {
+        "titulo": "TV UI-580",
+        "precio": [
+          19440,
+          15552,
+          13608,
+          11664,
+          9720,
+          8748
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "30%",
+          "40%",
+          "50%",
+          "55%"
+        ]
+      },
+      {
+        "titulo": "Go UI-716",
+        "precio": [
+          5000,
+          4250,
+          4000,
+          3500,
+          3400,
+          3000,
+          2500
+        ],
+        "porcentajes": [
+          "0%",
+          "15%",
+          "20%",
+          "30%",
+          "32%",
+          "40%",
+          "50%"
+        ]
+      },
+      {
+        "titulo": "Go Adicional",
+        "precio": 2500
+      },
+      {
+        "titulo": "Fútbol",
+        "precio": [
+          27660,
+          22128,
+          13830
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "50%"
+        ]
+      },
+      {
+        "titulo": "HBO",
+        "precio": [
+          13230,
+          10584,
+          6615
+        ],
+        "porcentajes": [
+          "0%",
+          "20%",
+          "50%"
+        ]
+      },
+      {
+        "titulo": "Adultos",
+        "precio": 5000
+      },
+      {
+        "titulo": "Rehabilitación Internet/HD",
+        "precio": 6800
+      },
+      {
+        "titulo": "Gastos Administrativos",
+        "precio": 2150
+      },
+      {
+        "titulo": "1ra Reconexión",
+        "precio": 9180
+      },
+      {
+        "titulo": "2da Reconexión",
+        "precio": 13070
+      },
+      {
+        "titulo": "3ra Reconexión",
+        "precio": 15800
+      }
+    ]
+  },
+  "listaPerico": {
+    "Cable": [
+      {
+        "titulo": "TV UI-1126",
+        "precio": [
+          19000,
+          15200
+        ],
+        "porcentajes": [
+          "0%",
+          "20%"
+        ]
+      },
+      {
+        "titulo": "4GO App X3 (PERICO)",
+        "precio": [
+          10000,
+          8000
+        ],
+        "porcentajes": [
+          "0%",
+          "20%"
+        ]
+      },
+      {
+        "titulo": "Fútbol",
+        "precio": [
+          27660,
+          22128
+        ],
+        "porcentajes": [
+          "0%",
+          "20%"
+        ]
+      },
+      {
+        "titulo": "HBO",
+        "precio": [
+          13230,
+          10584
+        ],
+        "porcentajes": [
+          "0%",
+          "20%"
+        ]
+      },
+      {
+        "titulo": "Adultos",
+        "precio": 5000
+      },
+      {
+        "titulo": "Rehabilitación Internet/HD",
+        "precio": 5040
+      },
+      {
+        "titulo": "Gastos Administrativos",
+        "precio": 1610
+      },
+      {
+        "titulo": "1ra Reconexión",
+        "precio": 6830
+      },
+      {
+        "titulo": "2da Reconexión",
+        "precio": 9770
+      },
+      {
+        "titulo": "3ra Reconexión",
+        "precio": 11820
+      }
+    ]
+  }
+};
+
+/*********************************
  * Septiembre 2026** 
  **********************************/
 
@@ -3885,6 +4331,7 @@ let localidad = document.querySelector("#localidad");
 let listaMes = document.querySelector("#lista");
 
 let obListas = {
+    listaOct2026,
     listaSep2026,
     listaJun2026,
     listaMar2026,
